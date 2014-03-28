@@ -112,6 +112,12 @@ function createStory(storyText)
 	});
 	icoontjes.append(color);
 
+	//click on a story -> do nothing
+	story.click(function(event) {
+		event.stopPropagation();
+	})
+
+
 	story.append(icoontjes);
 	story.append($('<span class="storyText"></span>').text(storyText));
 	story.draggable({greedy: true});
