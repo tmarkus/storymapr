@@ -1,0 +1,52 @@
+#board .row {
+	border-bottom: 1px dashed black;
+	clear: left;
+	height: auto;
+}
+
+#board .cell {
+	border-right: 1px dashed black;
+	min-height: 4em;
+	width: 10em;
+	margin: 3px;
+	float: left;
+	clear: none;
+}
+
+#board #thead .cell {
+	text-align: center;
+}
+
+.story {
+	background-color: rgb(220, 220, 220);
+	border: 3px solid DarkGray;
+	min-height: 3em;
+	margin: 3px;
+}
+
+.story .storyText {
+	display: block;
+	width: 80%;
+	padding: 0.1rem 0.2rem;
+}
+
+.icoontjes {
+	width: 1em;
+	float: right;
+}
+
+.right {
+	float: right;
+}
+
+.ui-icon {
+	display: none;
+}
+
+.story:hover .ui-icon {
+	display: block;
+}
+
+.activated {
+	background-color: rgb(28, 163, 130);	
+}

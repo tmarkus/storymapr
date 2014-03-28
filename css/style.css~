@@ -1,0 +1,30 @@
+#board .row {
+	border-bottom: 1px dashed black;
+	clear: left;
+	height: auto;
+}
+
+#board .cell {
+	border-right: 1px dashed black;
+	min-height: 4em;
+	width: 10em;
+	margin: 3px;
+	float: left;
+	clear: none;
+}
+
+#board .thead {
+	text-align: center;
+}
+
+.story {
+	background: #DCDCDC;
+	border: 3px solid DarkGray;
+	min-height: 3em;
+	margin: 3px;
+}
+
+.right {
+	float: right;
+}
+
