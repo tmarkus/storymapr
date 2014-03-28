@@ -3,7 +3,7 @@ var default_story_text = "My cat ate my homework."
 
 function createCell() 
 {
-	var cell = $('<div class="cell"></div>');
+	var cell = $('<td class="cell"></td>');
 
 	cell.droppable({
 		hoverClass: "ui-state-hover",
@@ -20,9 +20,11 @@ function createCell()
 		}
 	});
 
-	//voeg een story toe aan een cell
+	//add a story to a cell
 	cell.click(function() {
-		$(this).append(createStory(default_story_text));
+		if ($("#board").find("textarea").size() == 0) { //only add it if we don't have an open textarea
+			$(this).append(createStory(default_story_text));
+		}
 	});
 
 	return cell;
@@ -34,20 +36,23 @@ function addHeader(title)
 	lanes++;
 
 	//add new header
-	var headerCell = $('<div class="cell"></div');
+	var headerCell = $('<th class="cell"></th');
 
 	if (title == undefined)	title = "Header"
 
-	headerCell.append($("<p>").text(title));
+	var headerCellText = $("<span>");
+	headerCell.append(headerCellText.text(title));
 
-	headerCell.click(function() {
-		var content = prompt("Content:");
-		if (content)
-		{
-			$(headerCell).find("p").remove();
-			$(headerCell).append($("<p>").text(content));
-		}
+	//make header text editable
+	$(headerCellText).editable(function(value, settings) {
+		return value;
+	},
+	{
+		type: 'text',
+		onblur: 'submit' //store changes on lost focus
 	});
+
+
 	$("#board #thead .row").append(headerCell);
 
 
@@ -58,7 +63,7 @@ function addHeader(title)
 function addSprint()
 {
 	//add additional cells for the new row
-	var row = $('<div class="row"></div>');
+	var row = $('<tr class="row"></tr>');
 
 	for(var i=0; i < lanes; i++)
 	{
@@ -78,49 +83,55 @@ function createStory(storyText)
 	//remove a story
 	var trash = $('<span class="ui-icon ui-icon-trash right"></span>');
 	trash.click(function(event) {
-		if (confirm("Are you sure you want to remove this story?")) 
-		{
-			story.remove();
-		}
+		story.remove();
 		event.stopPropagation();
 	});
 	icoontjes.append(trash);
-
-	//edit a story
-	var edit = $('<span class="ui-icon ui-icon-note right"></span>');
-	edit.click(function(event) {
-		context = prompt("Story content:");
-		
-		if (context)
-		{
-			story.find(".storyText").remove();
-			story.append($('<span class="storyText"></span>').text(context));
-		}
-		event.stopPropagation();
-	});
-	icoontjes.append(edit);
 	
 	//color switch
 	var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
 	color.click(function(event) {
 		var story = $(this).parent().parent();
-		
-		if (story.hasClass("activated"))	story.removeClass("activated");
-		else								story.addClass("activated");
-		
+		story.toggleClass("activated");
 		event.stopPropagation();
 	});
 	icoontjes.append(color);
 
 	//click on a story -> do nothing
+	//required such that we don't add a story in the same cell accidentally
 	story.click(function(event) {
 		event.stopPropagation();
 	})
 
+	//make story text editable
+	var storyContent = $('<span class="storyText"></span>').text(storyText);
+	$(storyContent).editable(function(value, settings) {
+		return value;
+	},
+	{
+		type: 'textarea',
+		onblur: 'submit' //store changes on lost focus
+	});
+	//enable autogrow for the newly created textarea
+	$(storyContent).click(function(event) {
+		$(this).find("textarea").autosize();
+	});
 
+
+	//add icons	
 	story.append(icoontjes);
-	story.append($('<span class="storyText"></span>').text(storyText));
-	story.draggable({greedy: true});
+	story.append(storyContent);
+
+	//temporarily disable editable clicks when dragging a story
+	story.draggable({
+						greedy: true,
+						start: function() {
+							$(this).find(".storyText").editable("disabled");
+						},
+						stop: function() {
+							$(this).find(".storyText").editable("enabled");
+						},
+					});
 
 	return story;
 }
@@ -129,12 +140,15 @@ function initBoard()
 {
 		lanes = 0;
 		$("#board").empty();
-		$("#board").append($('<div id="thead"></div>').append('<div class="row"></div>'));
-		$("#board").append($('<div id="tbody">'));
+		$("#board").append($('<thead id="thead"></div>').append('<tr class="row"></tr>'));
+		$("#board").append($('<tbody id="tbody">'));
 }
 
 function importBoard(data)
 {
+	//set the title
+	$("#title").text(data["title"]);
+	
 	//set the headers again
 	jQuery.each(data["header"], function(i, val) {
 		addHeader(val);
@@ -183,7 +197,9 @@ function exportBoard()
 		rows.push(cells);
 	});
 
-	data = {header: headers, cells: rows};
+	var title = $("#title").text();
+
+	data = {title: title, header: headers, cells: rows};
 	console.log(data);
 	
 	return data
@@ -197,6 +213,15 @@ $(document).ready(function() {
 	$('input[name=addLane]').click(function() {
 		addHeader();
 	});		
+
+	//make title editable
+	$("#title").editable(function(value, settings) {
+		return value;
+	},
+	{
+		type: 'text'
+	});
+
 
 	function updateBoard(currentBoard, newBoard)
 	{

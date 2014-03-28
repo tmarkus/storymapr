@@ -1,20 +1,32 @@
-#board .row {
-	border-bottom: 1px dashed black;
-	clear: left;
-	height: auto;
+#board
+{
+	border-collapse: collapse;
+}
+
+#board #thead .cell {
+	border-top: 1px dashed DarkGray;
 }
 
 #board .cell {
-	border-right: 1px dashed black;
-	min-height: 4em;
+	border-right: 1px dashed DarkGray;
+	border-bottom: 1px dashed DarkGray;
 	width: 10em;
 	margin: 3px;
-	float: left;
-	clear: none;
+	vertical-align: top;
+}
+
+#board #tbody .cell {
+		height: 2em;
 }
 
 #board #thead .cell {
 	text-align: center;
+}
+
+#board #thead span {
+	padding-bottom: 3px;
+	padding-top: 3px;
+	display: inline-block;
 }
 
 .story {
@@ -35,6 +47,11 @@
 	float: right;
 }
 
+.icoontjes .ui-icon-circle-check {
+	margin-bottom: 0;
+	margin-top: 100%;
+}
+
 .right {
 	float: right;
 }
@@ -48,5 +65,5 @@
 }
 
 .activated {
-	background-color: rgb(28, 163, 130);	
+	background-color: rgb(28, 163, 130);
 }
