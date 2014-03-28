@@ -1,0 +1,4 @@
+A simple interactive storymap tool
+---------------------------------------
+
+Move js/setting.js.example to js/settings.js and enter your parse.com API key details (only required if you want to store your maps online)
