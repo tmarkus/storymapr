@@ -70,7 +70,7 @@ function addSprint()
 		row.append(createCell());
 	}
 
-	$("#board > #tbody").append(row);
+	$("#board #tbody").append(row);
 	return row;	
 }	
 
@@ -177,7 +177,7 @@ function exportBoard()
 {
 	//collect the headers
 	var headers = [];
-	$("#board #thead .cell p").each (function() {
+	$("#board #thead .cell").each (function() {
 		headers.push($(this).text());
 	});
 	
