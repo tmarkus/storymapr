@@ -57,7 +57,9 @@ function addHeader(title)
 
 
 	//add a new cell to each row				
-	$("#board #tbody .row").append(createCell());
+	$.each($("#board #tbody .row"), function() {
+		$(this).append(createCell());	
+	});
 }
 
 function addSprint()
