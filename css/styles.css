@@ -596,8 +596,16 @@ table.table tr:first-child td {
 .ui-widget-header .ui-state-focus {
   border: 0;
   background: #f97e75;
-  font-size: normal;
+  font-weight: normal;
   color: #3b4d55;
+}
+.ui-state-hover .icoontjes,
+.ui-widget-content .ui-state-hover .icoontjes,
+.ui-widget-header .ui-state-hover .icoontjes,
+.ui-state-focus .icoontjes,
+.ui-widget-content .ui-state-focus .icoontjes,
+.ui-widget-header .ui-state-focus .icoontjes {
+  display: none!important;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
@@ -687,11 +695,7 @@ button:hover {
 .button:active,
 input[type=submit]:active,
 input[type=button]:active,
-button:active,
-.button:focus,
-input[type=submit]:focus,
-input[type=button]:focus,
-button:focus {
+button:active {
   background: #333e42;
   border-color: #333e42;
 }
@@ -747,11 +751,7 @@ button.button-detail:hover {
 .button-detail:active,
 input[type=submit].button-detail:active,
 input[type=button].button-detail:active,
-button.button-detail:active,
-.button-detail:focus,
-input[type=submit].button-detail:focus,
-input[type=button].button-detail:focus,
-button.button-detail:focus {
+button.button-detail:active {
   background: #0d4c3d;
   border-color: #0d4c3d;
 }
@@ -807,11 +807,7 @@ button.button-action:hover {
 .button-action:active,
 input[type=submit].button-action:active,
 input[type=button].button-action:active,
-button.button-action:active,
-.button-action:focus,
-input[type=submit].button-action:focus,
-input[type=button].button-action:focus,
-button.button-action:focus {
+button.button-action:active {
   background: #dc1709;
   border-color: #dc1709;
 }
@@ -864,11 +860,7 @@ button.button-soft:hover {
 .button-soft:active,
 input[type=submit].button-soft:active,
 input[type=button].button-soft:active,
-button.button-soft:active,
-.button-soft:focus,
-input[type=submit].button-soft:focus,
-input[type=button].button-soft:focus,
-button.button-soft:focus {
+button.button-soft:active {
   background: #0d4c3d;
   border-color: #0d4c3d;
   border: 2px solid #17856a;
