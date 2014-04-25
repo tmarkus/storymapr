@@ -120,9 +120,11 @@ function createStory(storyText)
 	story.draggable({
 						greedy: true,
 						start: function() {
+							$("body").append('<div id="removeArea">Drag here to remove</div>');
 							$(this).find(".storyText").editable("disabled");
 						},
 						stop: function() {
+							$("#removeArea").remove();
 							$(this).find(".storyText").editable("enabled");
 						},
 					});
@@ -214,18 +216,6 @@ $(document).ready(function() {
 	},
 	{
 		type: 'text'
-	});
-
-	//make header draggable and remove a story that you drag to that location
-	$("header").droppable({
-		hoverClass: "ui-state-hover",
-		greedy: true,
-		drop: function( event, ui ) {
-			var draggedStory = $(".ui-draggable-dragging");
-
-			var e = draggedStory.detach();
-			event.stopImmediatePropagation();
-		}
 	});
 
 	function updateBoard(currentBoard, newBoard)

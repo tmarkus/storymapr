@@ -1012,3 +1012,12 @@ div.content--buttons button {
     page-break-after: avoid;
   }
 }
+#removeArea {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 96px;
+  z-index: 1;
+  background-color: red;
+}
