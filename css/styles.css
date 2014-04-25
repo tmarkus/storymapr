@@ -596,8 +596,16 @@ table.table tr:first-child td {
 .ui-widget-header .ui-state-focus {
   border: 0;
   background: #f97e75;
-  font-size: normal;
+  font-weight: normal;
   color: #3b4d55;
+}
+.ui-state-hover .icoontjes,
+.ui-widget-content .ui-state-hover .icoontjes,
+.ui-widget-header .ui-state-hover .icoontjes,
+.ui-state-focus .icoontjes,
+.ui-widget-content .ui-state-focus .icoontjes,
+.ui-widget-header .ui-state-focus .icoontjes {
+  display: none!important;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
