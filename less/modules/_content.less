@@ -1,0 +1,69 @@
+// =========== Content
+
+div.content {
+    padding: @spacing / 2;
+    .mixin-clearfix;
+    @media @breakpoint-two {
+        padding: @spacing;
+    }
+    &.has-no-padding { padding: 0; }
+}
+
+.has-horizontal-scroll {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+
+.content--header {
+    padding: @spacing / 2;
+    background: @color-neutral-50;
+    box-shadow: inset 0px -1px 2px @color-neutral-20, 0px 1px fade(@white, 50%);
+
+    @media @breakpoint-two { padding: @spacing; }
+
+    h1 { 
+        color: @color-neutral-10;
+        margin: 0;
+        display: inline-block;
+    }
+}
+
+div.content--buttons {
+    position: relative;
+    top: -1px;
+    padding: 0.75rem;
+    box-shadow: inset 0px 1px 2px fade(#000, 25%);
+    background: @color-neutral-20;
+    .mixin-clearfix;
+
+    @media @breakpoint-three {
+        padding: 1.5rem;
+    }
+
+    small {
+        color: @color-neutral-30;
+        display: block;
+        margin-bottom: 0.5rem;
+        @media @breakpoint-one {
+            display: inline-block;
+            padding-top: 0.5rem;
+            float: left;
+        }
+    }
+
+    .button, .button-detail, .button-soft, .button-action,
+    input[type=submit],
+    button {
+        display: block;
+        text-align: center;
+        margin-bottom: 0.25rem;
+
+        @media @breakpoint-one {
+            display: inline-block;
+            float: right;
+            margin-left: 0.25rem;
+        }
+
+    }
+}

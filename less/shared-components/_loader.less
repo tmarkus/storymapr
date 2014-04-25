@@ -1,0 +1,64 @@
+// =========== Loader
+
+.loader {
+    position: relative;
+    width: 40px;
+    padding: 1.15rem 0 1.75rem 0;
+    margin: auto;
+}
+
+.loader--dot1,
+.loader--dot2,
+.loader--dot3,
+.loader--dot4 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: @color-neutral-30;
+    position: absolute;
+
+    -webkit-animation: 0.5s ease infinite;
+    animation: 0.5s ease infinite;
+}
+
+.loader--dot1,
+.loader--dot2 {
+    left: 0;
+}
+.loader--dot3 { left: 15px; }
+.loader--dot4 { left: 30px; }
+
+@-webkit-keyframes show-loader--dot {
+    from { .mixin-transform(scale(0.001)); }
+    to { .mixin-transform(scale(1)); }
+}
+
+@-webkit-keyframes slide-loader--dot {
+    to { .mixin-transform(translateX(15px)); }
+}
+@keyframes show-loader--dot {
+    from { .mixin-transform(scale(0.001)); }
+    to { .mixin-transform(scale(1)); }
+}
+
+@keyframes slide-loader--dot {
+    to { .mixin-transform(translateX(15px)); }
+}
+
+.loader--dot1 {
+    -webkit-animation-name: show-loader--dot;
+    animation-name: show-loader--dot;
+}
+
+.loader--dot2,
+.loader--dot3 {
+    -webkit-animation-name: slide-loader--dot;
+    animation-name: slide-loader--dot;
+}
+
+.loader--dot4 {
+    -webkit-animation-name: show-loader--dot;
+    animation-name: show-loader--dot;
+    -webkit-animation-direction: reverse; /* thx @HugoGiraudel */
+    animation-direction: reverse; /* thx @HugoGiraudel */
+}

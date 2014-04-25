@@ -3,8 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Interactive story map</title>
-	<link href="css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+	<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css">
+
+	<link rel="stylesheet" href="css/styles.css">
+
 	<script src="js/jquery-2.1.0.js"></script>
 	<script src="js/jquery-ui-1.10.4.custom.js"></script>
 	<script src="js/jquery.jeditable.js"></script>
@@ -17,21 +21,20 @@
 </head>
 
 <body>
+	<header class="content--header">
+		<h1 id="title">Storymapr EduArio</h1>
+		<div class="button--wrapper">
+			<input class="button-detail" type="button" name="store" value="save">
+		</div>
+		<div class="button--wrapper">
+			<input class="button-soft" type="button" name="addSprint" value="add sprint">
+			<input class="button-soft" type="button" name="addLane" value="add lane">
+		</div>
+	</header>
 
-<h1 id="title"> Story map </h1>
-
-
-<table id="board">
-</table>
-
-<div style="clear: both; margin-top: 2em;">
-<input type="button" name="addSprint" value="add sprint">
-<input type="button" name="addLane" value="add lane">
-</div>
-
-<div style="clear: both; margin-top: 2em;">
-<input type="button" name="store" value="save">
-</div>
+	<div class="content has-horizontal-scroll">
+		<table class="table" id="board"></table>
+	</div>
 
 </body>
 </html>

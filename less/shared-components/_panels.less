@@ -1,0 +1,20 @@
+// =========== Panels
+
+.panel {
+    background: @white;
+    border-radius: @border-radius-1;
+    margin-bottom: @spacing;
+    padding: 0.75rem;
+    border-bottom: 1px solid @color-neutral-20;
+    @media @breakpoint-three {
+        padding: 1.75rem;
+    }
+}
+
+.panel--callout {
+	.panel;
+    background: @color-brand-30;
+    color: @white;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}

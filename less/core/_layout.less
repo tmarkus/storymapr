@@ -1,0 +1,74 @@
+/// =========== Layout
+
+.l-full {
+    @media @breakpoint-two { .mixin-grid(48, 0.5, 0.5); }
+}
+.l-three-fourth {
+    @media @breakpoint-two { .mixin-grid(32, 0.5, 0.5); }
+    @media @breakpoint-three { .mixin-grid(36, 0.5, 0.5); }
+}
+.l-two-third {
+    @media @breakpoint-two { .mixin-grid(32, 0.5, 0.5); }
+}
+.l-half {
+    @media @breakpoint-two { .mixin-grid(24, 0.5, 0.5); }
+}
+.l-one-third {
+    @media @breakpoint-two { .mixin-grid(16, 0.5, 0.5); }
+}
+.l-one-fourth {
+    @media @breakpoint-two { .mixin-grid(16, 0.5, 0.5); }
+    @media @breakpoint-three { .mixin-grid(12, 0.5, 0.5); }
+}
+
+.l-narrow {
+    clear: both;
+    @media @breakpoint-three {
+        max-width: 70rem;
+        margin: auto;
+    }
+}
+.l-small {
+    clear: both;
+    @media @breakpoint-three {
+        max-width: 48rem;
+        margin: auto;
+    }
+}
+.l-medium {
+    clear: both;
+    @media @breakpoint-three {
+        max-width: 40rem;
+        margin: auto;
+    }
+}
+
+div.l-container {
+    min-height:100%;
+    height: auto;
+    width: 100%;
+
+    // Flex module
+    .mixin-display-flex; //create a flex layout
+    .mixin-flex-direction(row);
+    .mixin-flex-wrap(nowrap);
+}
+.l-first {
+    clear: left;
+}
+
+.l-flex-content {
+    .mixin-flex(1 1 auto);
+    .mixin-display-flex;
+    .mixin-flex-direction(column);
+    .mixin-flex-wrap(nowrap);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    @media @breakpoint-two {
+        margin-left: @navigation-width;
+        position: relative;
+    }
+}

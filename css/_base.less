@@ -1,0 +1,110 @@
+// =========== Base
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+
+*,
+*:after,
+*:before {
+    .mixin-box-sizing(border-box);
+}
+
+::-moz-selection { background: @color-neutral-50; color: @white; text-shadow: none; }
+::selection { background: @color-neutral-50; color: @white; text-shadow: none; }
+
+html {
+    color: @color-neutral-40;
+    font: 400 @font-size @font-base;
+    height: 100%;
+    width: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: @color-neutral-10;
+    line-height: 1.5em;
+    -webkit-transition: -webkit-transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -moz-transition: -moz-transform 50ms ease-out 0s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.5em;
+    margin: 0 0 0.75rem 0;
+}
+
+h1 {
+    font-size: 2.25rem;
+    font-weight: 300;
+}
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: 1.05rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin-bottom: @vertical-spacing;
+    &.lead {
+        font-weight: 400;
+        font-size: 1.2rem;
+        line-height: 2rem;
+    }
+}
+
+a {
+    //color: @color-action-30;
+    color: @color-brand-30;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    .mixin-transition(color 50ms);
+
+    &:hover { color: @color-brand-50; }
+}
+
+a.referral {
+    padding-left: 1rem;
+    .mixin-transition(~"color 50ms, padding-left 50ms");
+    &:hover { padding-left: 1.25rem; }
+    &:before {
+        position: relative;
+        top: 0.15rem;
+        margin-right: 0.5rem;
+    }
+}
+
+small { font-size: @font-size-20; color: @color-neutral-25; }
+
+em { font-style: italic; }
+
+strong { font-weight: bold; }
+
+code, pre { font-family: 'courier new', monospace; }
+
+abbr { border-bottom: 1px dotted @color-neutral-25; }
+
+del { text-decoration: line-through; }
+
+mark { background-color: lighten(yellow, 35%); }
+
+hr {
+    background-color: transparent;
+    border: solid @color-neutral-20;
+    border-width: 1px 0 0;
+    clear: both;
+    margin: 2em @vertical-spacing;
+    &.is-wide {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+ul, ol { margin: 0 0 @vertical-spacing 1.5em; }
+ul { list-style: disc; }
+ol { list-style: decimal; }

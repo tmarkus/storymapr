@@ -1,0 +1,128 @@
+// =========== Buttons
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+// Choose a div or ul to group up your buttons
+div.button--wrapper {
+    display: inline-block;
+    margin: 5px 0 0 @spacing;
+    float: right;
+}
+
+
+// The standard button has the @color-neutral colors
+.include-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: @border-radius-1;
+    cursor: pointer;
+    display: inline-block;
+    font-size: @font-size-20;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: @font-base;
+    line-height: 1.5rem !important;
+    padding: 0.35rem 1rem;
+    border: 0;
+    vertical-align: baseline;
+    text-decoration: none;
+
+    &.is-small {
+        font-size: @font-size-10;
+        padding: 0.2rem 0.65rem;
+    }
+
+    // If the button has an icon
+    &:before {
+        margin-right: 0.5rem;
+        position: relative;
+        top: 0.05rem;
+    }
+}
+
+.button,
+input[type=submit],
+input[type=button],
+button {
+    .include-button;
+    color: @white;
+    .mixin-gradient(top, @color-neutral-30, @color-neutral-40);
+    border: 2px solid @color-neutral-40;
+    -webkit-font-smoothing: antialiased;
+    &:hover {
+        background: @color-neutral-40;
+        color: @white;
+    }
+    &:active, &:focus {
+        background: @color-neutral-50;
+        border-color: @color-neutral-50;
+    }
+}
+
+// The detail button
+.button-detail,
+input[type=submit].button-detail,
+input[type=button].button-detail,
+button.button-detail {
+    .include-button;
+    color: @white;
+    .mixin-gradient(top, @color-brand-30, @color-brand-40);
+    border: 2px solid @color-brand-40;
+    -webkit-font-smoothing: antialiased;
+    &:hover {
+        background: @color-brand-40;
+        color: @white;
+    }
+    &:active,
+    &:focus {
+        background: @color-brand-50;
+        border-color: @color-brand-50;
+    }
+}
+
+// The action button
+.button-action,
+input[type=submit].button-action,
+input[type=button].button-action,
+button.button-action {
+    .include-button;
+    color: @white;
+    .mixin-gradient(top, @color-action-30, @color-action-40);
+    border: 2px solid @color-action-40;
+    -webkit-font-smoothing: antialiased;
+    &:hover {
+        background: @color-action-40;
+        color: @white;
+    }
+    &:active,
+    &:focus {
+        background: @color-action-50;
+        border-color: @color-action-50;
+    }
+}
+
+// The soft grey button
+.button-soft,
+input[type=submit].button-soft,
+input[type=button].button-soft,
+button.button-soft {
+    .include-button;
+    color: @color-neutral-10;
+    background: transparent;
+    border: 2px solid @color-brand-30;
+    &:hover {
+        background: @color-brand-40;
+        color: @white;
+        border: 2px solid @color-brand-40;
+    }
+    &:active, &:focus {
+       background: @color-brand-50;
+        border-color: @color-brand-50;
+        border: 2px solid @color-brand-40;
+    }
+}

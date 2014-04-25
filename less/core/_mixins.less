@@ -1,0 +1,90 @@
+// =========== Mixins
+
+// Backface-visibility
+// Example: .element { .mixin-backface-visibility(hidden); }
+.mixin-backface-visibility(@backface) {
+    -webkit-backface-visibility: @backface;
+    -moz-backface-visibility: @backface;
+    -ms-backface-visibility: @backface;
+    backface-visibility: @backface;
+}
+
+// Border-radius
+// Example: .element { .mixin-border-radius(@border-radius); }
+.mixin-border-radius(@radius) {
+    border-radius: @radius;
+    background-clip: padding-box;
+}
+
+// Box-sizing
+// Example: .element { .mixin-box-sizing(border-box); }
+.mixin-box-sizing(@box) {
+    -webkit-box-sizing: @box;
+    -moz-box-sizing: @box;
+    box-sizing: @box;
+}
+
+// Filters
+// Example: .element { .mixin-filter(grayscale(50%)); }
+.mixin-filter(@filter) {
+    -webkit-filter: @filter;
+    -moz-filter: @filter;
+    -o-filter: @filter;
+    filter: @filter;
+}
+
+// Perspective
+// Example: .element { @include perspective(1000); }
+.mixin-perspective(@perspective) {
+    -webkit-perspective: @perspective;
+    -moz-perspective: @perspective;
+    perspective: @perspective;
+}
+
+// Transform
+// Example: .element { .mixin-transform(translateX(1em)); }
+.mixin-transform(@transform) {
+    -webkit-transform: @transform;
+    transform: @transform;
+}
+
+// Transition
+// Example: .element { .mixin-transition(background 500ms ease-in); }
+.mixin-transition(@transition) {
+    -webkit-transition: @transition;
+    transition: @transition;
+}
+
+// Columns
+// Example: .element { .mixin-columns(2, 1em)); }
+.mixin-columns(@count, @gap) {
+    -webkit-column-count: @count;
+    -webkit-column-gap : @gap;
+    -moz-column-count: @count;
+    -moz-column-gap: @gap;
+    column-count: @count;
+    column-gap: @gap;
+}
+
+// Column rule
+// Example: .element { .mixin-column-rule(1px, solid, #000); }
+.mixin-columns-rule(@size, @style, @color) {
+    -webkit-column-rule-width: @size;
+    -webkit-column-rule-style: @style;
+    -webkit-column-rule-color: @color;
+    -moz-column-rule-width: @size;
+    -moz-column-rule-style: @style;
+    -moz-column-rule-color: @color;
+    column-rule-width: @size;
+    column-rule-style: @style;
+    column-rule-color: @color;
+}
+
+// Gradient
+// Example: .element { .mixin-gradient(top, #000, #fff); }
+.mixin-gradient(@side, @start, @end) {
+    background-color: @end;
+    background-image: -webkit-linear-gradient(@side, @start, @end);
+    background-image: -moz-linear-gradient(@side, @start, @end);
+    background-image: linear-gradient(@side, @start, @end);
+}
