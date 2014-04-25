@@ -1,0 +1,24 @@
+// =========== Tabs
+
+ul.tabs {
+    background: @color-neutral-20;
+    border-radius: @border-radius-1;
+    margin: 0 0 @vertical-spacing 0;
+    padding: 0.35rem 0.35rem 0 0.35rem;
+    li {
+        display: inline-block;
+        position: relative;
+    }
+    a {
+        color: @color-neutral-25;
+        display: block;
+        padding: 0.75rem;
+        &:hover { color: @color-neutral-50; }
+    }
+    li.is-selected a {
+        background: @white;
+        border-radius: 0.2rem 0.2rem 0 0;
+        color: @color-neutral-50;
+        font-weight: bold;
+    }
+}

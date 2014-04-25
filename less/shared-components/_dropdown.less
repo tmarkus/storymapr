@@ -1,0 +1,97 @@
+// =========== Dropdown
+
+.has-dropdown {
+    position: relative;
+}
+
+div.dropdown {
+    display: none;
+    position: absolute;
+    z-index: 11;
+    top: 2.25rem;
+    font-size: @font-size-20;
+    text-transform: none;
+    white-space: normal;
+    text-align: left;
+    background-color: fade(@color-neutral-60, 95%);
+    color: @white;
+    width: 14rem;
+    padding: 0.25rem;
+    border-radius: @border-radius-2;
+    -webkit-font-smoothing: antialiased;
+    box-shadow: 0px 0px 8px fade(@color-neutral-50, 30%);
+
+    &.is-open {
+        display: block;
+    }
+}
+
+div.dropdown--date {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: @font-size-20;
+    color: @color-neutral-25;
+    font-weight: 600;
+    margin: 0;
+    border-top: 1px solid @color-neutral-25;
+}
+
+ul.dropdown--list {
+    margin: 0;
+    list-style: none;
+    li {
+        margin-bottom: 1px;
+        display: block;
+        &:last-child { margin-bottom: 0; }
+    }
+    li.is-selected a {
+        color: @color-brand-20;
+        font-weight: 600;
+        background: @color-neutral-50;
+    }
+    a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: @color-neutral-20;
+        font-weight: 400;
+        border-radius: @border-radius-1;
+        &:hover {
+            color: @white;
+            background: @color-neutral-50;
+        }
+    }
+}
+
+span.dropdown--arrow {
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -5px;
+    content: " ";
+    display: block;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid fade(@color-neutral-60, 95%);
+}
+
+.dropdown--options {
+    display: none;
+    background: @color-neutral-60;
+    border-radius: 0 0 @border-radius-1 @border-radius-1;
+    padding: 0 0.35rem 0.35rem 0.35rem;
+    &.is-open {
+        display: block;
+    }
+    input {
+        border: 0;
+        &:first-child { border-radius: @border-radius-1 @border-radius-1 0 0; }
+        &:last-child { border-radius: 0 0 @border-radius-1 @border-radius-1; }
+        &:only-child { border-radius: @border-radius-1; }
+    }
+    input.button-action {
+        display: block;
+        margin: 0;
+        width: 100%;
+        border-radius: 0 0 @border-radius-1 @border-radius-1 !important;
+    }
+}

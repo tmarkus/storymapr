@@ -1,69 +1,55 @@
-#board
-{
-	border-collapse: collapse;
+#board {
+  border-collapse: collapse;
 }
-
 #board #thead .cell {
-	border-top: 1px dashed DarkGray;
+  border-top: 1px dashed DarkGray;
 }
-
 #board .cell {
-	border-right: 1px dashed DarkGray;
-	border-bottom: 1px dashed DarkGray;
-	width: 10em;
-	margin: 3px;
-	vertical-align: top;
+  border-right: 1px dashed DarkGray;
+  border-bottom: 1px dashed DarkGray;
+  width: 10em;
+  margin: 3px;
+  vertical-align: top;
 }
-
 #board #tbody .cell {
-		height: 2em;
+  height: 2em;
 }
-
 #board #thead .cell {
-	text-align: center;
+  text-align: center;
 }
-
 #board #thead span {
-	padding-bottom: 3px;
-	padding-top: 3px;
-	display: inline-block;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  display: inline-block;
 }
-
 .story {
-	background-color: rgb(220, 220, 220);
-	border: 3px solid DarkGray;
-	min-height: 3em;
-	margin: 3px;
+  background-color: #dcdcdc;
+  border: 3px solid DarkGray;
+  min-height: 3em;
+  margin: 3px;
 }
-
 .story .storyText {
-	display: block;
-	width: 80%;
-	padding: 0.1rem 0.2rem;
+  display: block;
+  width: 80%;
+  padding: 0.1rem 0.2rem;
 }
-
 .icoontjes {
-	width: 1em;
-	float: right;
+  width: 1em;
+  float: right;
 }
-
 .icoontjes .ui-icon-circle-check {
-	margin-bottom: 0;
-	margin-top: 100%;
+  margin-bottom: 0;
+  margin-top: 100%;
 }
-
 .right {
-	float: right;
+  float: right;
 }
-
 .ui-icon {
-	display: none;
+  display: none;
 }
-
 .story:hover .ui-icon {
-	display: block;
+  display: block;
 }
-
 .activated {
-	background-color: rgb(28, 163, 130);
+  background-color: #1ca382;
 }

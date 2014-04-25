@@ -1,0 +1,191 @@
+// =========== Forms
+
+input[type=search] { -webkit-appearance: textfield; }
+input[type=search]::-webkit-search-decoration { -webkit-appearance: none; }
+
+input::-webkit-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+input::-moz-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+input:-ms-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+input:input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+textarea::-webkit-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+textarea::-moz-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+textarea:-ms-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+textarea:input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-25;
+}
+
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=email],
+input[type=tel],
+input[type=url],
+textarea,
+select {
+    -webkit-appearance: none;
+    border: 1px solid @color-neutral-20;
+    border-radius: @border-radius-1;
+    box-shadow: inset 0px 1px 2px @color-neutral-10;
+    color: @color-neutral-40;
+    display: block;
+    font-family: @font-base;
+    font-size: @font-size-30;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0.5em;
+    vertical-align: baseline;
+    width: 100% !important;
+    min-width: 6rem;
+
+    &:focus {
+        border-color: @color-neutral-25;
+        color: @color-neutral-50;
+        outline: 0;
+    }
+}
+
+textarea {
+    overflow: auto;
+    resize: vertical;
+    vertical-align: top;
+    display: block;
+    width: 100% !important;
+}
+
+form {  }
+
+fieldset {  }
+
+legend {
+    border: 0;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    font-size: @font-size-50;
+}
+
+ul.form {
+    clear: both;
+    padding: 0 !important;
+    list-style: none;
+    margin: 0 0 @vertical-spacing 0;
+
+    > li {
+        padding: 0.75rem;
+        border-bottom: 2px solid @color-neutral-10;
+        .mixin-clearfix;
+
+        &:last-child { border-bottom: 0; }
+        @media @breakpoint-two { padding: 1.5rem; }
+    }
+
+    > li > label {
+        clear: left;
+        // cursor: pointer;
+        display: block;
+        font-weight: 400;
+        padding-top: 0.6rem;
+        text-align: left;
+        color: @color-neutral-25;
+
+        @media @breakpoint-one { .mixin-grid(16, 0, 1); }
+
+        // &:hover { color: @color-neutral-50; }
+    }
+
+    div.form--fields {
+
+        @media @breakpoint-one { .mixin-grid(32, 0, 0); }
+
+        p, small {
+            display: block;
+            margin: 0.25rem 0;
+        }
+        p.form--description { margin: 0.6rem 0; }
+    }
+}
+
+ul.form--checklist {
+    list-style: none;
+    margin: 0.6rem 0;
+    li { margin: 0.5rem 0; }
+    input {
+        display: inline;
+        margin-right: 0.8rem;
+    }
+    label {
+        .mixin-grid-reset;
+        font-weight: normal;
+        &:hover {
+            color: @color-neutral-40;
+            cursor: pointer;
+        }
+    }
+}
+
+li.form--error,
+div.form--error {
+    label {
+        color: @color-alert !important;
+        &:hover { color: @color-alert-40; }
+    }
+    input[type=text],
+    input[type=number],
+    input[type=password],
+    input[type=search],
+    input[type=email],
+    input[type=tel],
+    input[type=url],
+    textarea,
+    select {
+        border: 1px solid @color-alert;
+        &:focus { border: 1px solid @color-alert; }
+    }
+    ul.form--errors {
+        color: @color-alert;
+        list-style: none;
+        margin: 0 0 .35rem .35rem;
+        li { font-size: @font-size-20; }
+    }
+}
+
+div.form--buttons {
+    padding: 0.75rem;
+    @media @breakpoint-two {
+        padding: 1.5rem;
+    }
+}
+
+span.form--fields-avatar {
+     display: block;
+     height: 5rem;
+     width: 5rem;
+     background-size: cover;
+     background-position: 50% 50%;
+     border-radius: @border-radius-1;
+     box-shadow: inset 0px 0px 4px 0 fade(#000, 25%);
+}
