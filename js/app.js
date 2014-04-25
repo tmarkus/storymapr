@@ -82,14 +82,6 @@ function createStory(storyText)
 
 	var icoontjes = $('<div class="icoontjes">');
 
-	//remove a story
-	var trash = $('<span class="ui-icon ui-icon-trash right"></span>');
-	trash.click(function(event) {
-		story.remove();
-		event.stopPropagation();
-	});
-	icoontjes.append(trash);
-	
 	//color switch
 	var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
 	color.click(function(event) {
