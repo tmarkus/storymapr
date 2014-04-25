@@ -224,6 +224,17 @@ $(document).ready(function() {
 		type: 'text'
 	});
 
+	//make header draggable and remove a story that you drag to that location
+	$("header").droppable({
+		hoverClass: "ui-state-hover",
+		greedy: true,
+		drop: function( event, ui ) {
+			var draggedStory = $(".ui-draggable-dragging");
+
+			var e = draggedStory.detach();
+			event.stopImmediatePropagation();
+		}
+	});
 
 	function updateBoard(currentBoard, newBoard)
 	{
