@@ -122,6 +122,17 @@ function createStory(storyText)
 						start: function() {
 							$("body").append('<div id="removeArea">Drag here to remove</div>');
 							$(this).find(".storyText").editable("disabled");
+						
+							$("#removeArea").droppable({
+								hoverClass: "ui-state-hover",
+								greedy: true,
+								drop: function( event, ui ) {
+									var draggedStory = $(".ui-draggable-dragging");
+									draggedStory.remove();
+									
+									$("#removeArea").hide('slow', function(){ $("#removeArea").remove(); });
+								}
+							});
 						},
 						stop: function() {
 							$("#removeArea").remove();

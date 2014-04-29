@@ -1018,6 +1018,9 @@ div.content--buttons button {
   right: 0;
   top: 0;
   height: 96px;
+  line-height: 96px;
   z-index: 1;
   background-color: #f85e53;
+  font-size: 30px;
+  text-align: center;
 }
