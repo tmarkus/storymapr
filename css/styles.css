@@ -506,11 +506,16 @@ table.table td:first-of-type {
   color: #49636f;
   border-bottom: 1px solid #cbd1cf;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+  padding: 0;
 }
 table.table td:first-of-type .story {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   background: transparent;
+}
+table.table td:first-of-type .activated {
+  background: #49636f;
+  margin: 0;
 }
 table.table tr:first-child td {
   box-shadow: 0 0 0;
