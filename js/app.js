@@ -120,7 +120,8 @@ function createStory(storyText)
 	story.draggable({
 						greedy: true,
 						start: function() {
-							$("body").append('<div class="remove-area--wrapper" id="removeArea"><div class="remove-area">Drag here to remove</div></div>');
+							var removeArea = $('<div class="remove-area--wrapper" id="removeArea"><div class="remove-area">Drag here to remove</div></div>');
+							$("body").append(removeArea);
 							$(this).find(".storyText").editable("disabled");
 						
 							$("#removeArea").droppable({
@@ -130,7 +131,7 @@ function createStory(storyText)
 									var draggedStory = $(".ui-draggable-dragging");
 									draggedStory.remove();
 									
-									$("#removeArea").hide('slow', function(){ $("#removeArea").remove(); });
+									$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ $("#removeArea").remove(); });
 								}
 							});
 						},
