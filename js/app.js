@@ -120,11 +120,11 @@ function createStory(storyText)
 	story.draggable({
 						greedy: true,
 						start: function() {
-							$("body").append('<div id="removeArea">Drag here to remove</div>');
+							$("body").append('<div class="remove-area--wrapper" id="removeArea"><div class="remove-area">Drag here to remove</div></div>');
 							$(this).find(".storyText").editable("disabled");
 						
 							$("#removeArea").droppable({
-								hoverClass: "ui-state-hover",
+								//hoverClass: "ui-state-hover",
 								greedy: true,
 								drop: function( event, ui ) {
 									var draggedStory = $(".ui-draggable-dragging");

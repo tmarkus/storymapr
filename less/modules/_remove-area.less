@@ -1,0 +1,45 @@
+// =========== Remove Area
+
+.remove-area--wrapper {
+	.mixin-display-flex;
+	.mixin-justify-content(space-around);
+	.mixin-align-items(flex-start);
+
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.remove-area {
+	.mixin-display-flex;
+	.mixin-justify-content(center);
+	.mixin-align-items(center);
+
+	.mixin-flex(0 1 auto);
+	background-color: @color-action-30;
+	position: relative;
+	height: 50px;
+	width: 50%;
+	min-width: 100px;
+	text-align: center;
+	color: @white;
+	font-weight: 600;
+	&:before, 
+	&:after {
+		content: " ";
+		position: absolute;
+		top: 0;
+	}
+	&:before {
+		left: -100px;
+		border-bottom: 50px solid transparent;
+		border-right: 100px solid @color-action-30;
+	}
+	&:after {
+		right: -100px;
+		border-bottom: 50px solid transparent;
+		border-left: 100px solid @color-action-30;
+	}
+}

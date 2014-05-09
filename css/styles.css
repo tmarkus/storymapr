@@ -958,6 +958,64 @@ div.content--buttons button {
     margin-left: 0.25rem;
   }
 }
+.remove-area--wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  -ms-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: flex-start;
+  -ms-align-items: flex-start;
+  align-items: flex-start;
+  -ms-flex-align: start;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.remove-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-box-flex: 0 1 auto;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  background-color: #f85e53;
+  position: relative;
+  height: 50px;
+  width: 50%;
+  min-width: 100px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+}
+.remove-area:before,
+.remove-area:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+}
+.remove-area:before {
+  left: -100px;
+  border-bottom: 50px solid transparent;
+  border-right: 100px solid #f85e53;
+}
+.remove-area:after {
+  right: -100px;
+  border-bottom: 50px solid transparent;
+  border-left: 100px solid #f85e53;
+}
 @media print {
   * {
     background: transparent !important;
@@ -1011,16 +1069,4 @@ div.content--buttons button {
   h3 {
     page-break-after: avoid;
   }
-}
-#removeArea {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 96px;
-  line-height: 96px;
-  z-index: 1;
-  background-color: #f85e53;
-  font-size: 30px;
-  text-align: center;
 }
