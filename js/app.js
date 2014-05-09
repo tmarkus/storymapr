@@ -171,8 +171,19 @@ function importBoard(data)
 			currentSprint.find(".cell").each(function(k, cellInDocument) {
 				if (j == k)
 				{
-					jQuery.each(cell, function(z, text) {
-						$(cellInDocument).append(createStory(text));
+					jQuery.each(cell, function(z, storyData) {
+						
+						//backwards compat for when stories only consisted of text
+						if (typeof storyData == 'string')
+						{
+							$(cellInDocument).append(createStory(storyData));
+						}
+						else
+						{
+							var story = createStory(storyData.text);
+							story.addClass(storyData.state);
+							$(cellInDocument).append(story);
+						}
 					});
 				}
 			});
@@ -197,7 +208,13 @@ function exportBoard()
 			var cell = [];
 			$(this).find(".story .storyText").each(function() 
 			{
-				cell.push($(this).text());
+				var state = "none";
+				if ($(this).parent().hasClass("activated"))
+				{
+					state = "activated";
+				}
+				
+				cell.push({'text': $(this).text(), 'state': state});
 			});
 			cells.push(cell);
 		});
