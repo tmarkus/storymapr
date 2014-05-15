@@ -1,6 +1,9 @@
 var lanes = 0; //number of lanes	
 var default_story_text = "My cat ate my homework."
 
+var cycle = ["none", "designed", "activated"]; //possible states a story can be in
+
+
 function createCell() 
 {
 	var cell = $('<td class="cell"></td>');
@@ -86,7 +89,23 @@ function createStory(storyText)
 	var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
 	color.click(function(event) {
 		var story = $(this).parent().parent();
-		story.toggleClass("activated");
+		
+		for(var i=0; i < cycle.length; i++)
+		{
+			if ( story.hasClass(cycle[i]) ) {
+				if (i == cycle.length-1)
+				{
+					story.addClass("none");
+				}
+				else
+				{
+					story.addClass(cycle[i+1]);
+				}
+				story.removeClass(cycle[i]);
+				break;
+			}
+		}
+
 		event.stopPropagation();
 	});
 	icoontjes.append(color);
@@ -209,13 +228,17 @@ function exportBoard()
 			var cell = [];
 			$(this).find(".story .storyText").each(function() 
 			{
-				var state = "none";
-				if ($(this).parent().hasClass("activated"))
-				{
-					state = "activated";
-				}
+
+				var resultState = "none";
+				var parent = $(this).parent();
+				cycle.forEach(function(state) {
+					if (parent.hasClass(state))
+					{
+						resultState = state;
+					}
+				});
 				
-				cell.push({'text': $(this).text(), 'state': state});
+				cell.push({'text': $(this).text(), 'state': resultState});
 			});
 			cells.push(cell);
 		});
