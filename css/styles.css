@@ -584,6 +584,10 @@ table.table tr:first-child td {
 .story.activated .ui-icon {
   background-image: url(ui-lightness/images/ui-icons_ffffff_256x240.png);
 }
+.story.designed {
+  background: #f4fdfb;
+  color: #49636f;
+}
 .ui-draggable-dragging {
   font-weight: normal;
   color: #3b4d55;
