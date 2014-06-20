@@ -32,6 +32,15 @@ function createCell()
 	return cell;
 }
 
+function swapElements(arrayData, index1, index2)
+{
+	var tmp = arrayData[index1];
+	arrayData[index1] = arrayData[index2];
+	arrayData[index2] = tmp;
+
+	return arrayData;
+}
+
 function addHeader(title)
 {
 	//increment the number of lanes
@@ -41,9 +50,57 @@ function addHeader(title)
 	var headerCell = $('<th class="cell"></th');
 
 	if (title == undefined)	title = "Header"
+	var headerCellText = $('<span style="float: left;">');
+	headerCell.append(headerCellText.append($('<span class="title"></span>').text(title)));
 
-	var headerCellText = $("<span>");
-	headerCell.append(headerCellText.text(title));
+	//add arrows
+	if (lanes > 1)
+	{
+		var arrows = $('<span class="arrows" style="float: right;"></span>');
+		
+		//left arrow
+		arrows.append($("<span>&#8592; </span>").click(function() {
+			var exported = exportBoard();
+		
+			//swap arrays
+			var index = $(this).closest("th").index();
+			if (index > 1)
+			{
+				swapElements(exported["header"], index, index-1);
+			
+				$.each(exported["cells"], function(row_id, value) {
+					swapElements(exported["cells"][row_id], index, index-1);
+				});
+			}
+
+			//reload board
+			initBoard();
+			importBoard(exported);
+		}));
+		
+		//right arrow
+		arrows.append($("<span>&#8594;</span>").click(function() {
+			var exported = exportBoard();
+			
+			//swap arrays
+			var index = $(this).closest("th").index();
+			if (index < lanes-1)
+			{
+				swapElements(exported["header"], index, index+1);
+			
+				$.each(exported["cells"], function(row_id, value) {
+					swapElements(exported["cells"][row_id], index, index+1);
+				});
+			}
+
+			//reload board
+			initBoard();
+			importBoard(exported);
+		}));
+		
+		headerCell.append(arrows);
+	}
+
 
 	//make header text editable
 	$(headerCellText).editable(function(value, settings) {
@@ -217,7 +274,7 @@ function exportBoard()
 {
 	//collect the headers
 	var headers = [];
-	$("#board #thead .cell").each (function() {
+	$("#board #thead .cell .title").each (function() {
 		headers.push($(this).text());
 	});
 	
@@ -250,7 +307,6 @@ function exportBoard()
 	var title = $("#title").text();
 
 	data = {title: title, header: headers, cells: rows};
-	console.log(data);
 	
 	return data
 }
