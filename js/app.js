@@ -3,7 +3,6 @@ var default_story_text = "My cat ate my homework."
 
 var cycle = ["none", "designed", "activated"]; //possible states a story can be in
 
-
 function createCell() 
 {
 	var cell = $('<td class="cell"></td>');
@@ -275,39 +274,26 @@ $(document).ready(function() {
 
 	function updateBoard(currentBoard, newBoard)
 	{
-		currentBoard.save({data: exportBoard()}).then(function(object) {
-			newurl = window.location+"?storymap="+object.id;
-			
-			if (newBoard)
-			{
-				alert("This storymap is now available at: " + newurl);
-				window.location = newurl;
+		//readable by anyone, but only writeable by the loggedIn user
+		var mapACL = new Parse.ACL(Parse.User.current());
+		mapACL.setPublicReadAccess(true);
+		currentBoard.setACL(mapACL);
+
+		currentBoard.save({data: exportBoard()}, {
+			success: function(currentBoard) {
+				var newurl = window.location+"?storymap="+currentBoard.id;
+
+				if (newBoard)
+				{
+					alert("This storymap is now available at: " + newurl);
+					window.location = newurl;
+				}
+			},
+			error: function(currentBoard, error) {
+				alert("Error: I'm sorry Dave, I can't let you do that. (" + error.code + " " + error.message + ")");			
 			}
 		});
 	}
-
-	$('input[name=store]').click(function() {
-		var StoryMap = Parse.Object.extend("StoryMap");
-		var query = new Parse.Query(StoryMap);
-		
-		var currentBoard = undefined;
-		var name = window.location.search.substring(1).split("=")[1];
-		
-		$(this).attr('disabled', true).attr('value', 'updating...');
-		
-		query.get(name, {
-			  success: function(currentBoard) {
-				$('input[name=store]').attr('disabled', false).attr('value', 'save');
-				updateBoard(currentBoard, false);
-			  },
-			  error: function() {
-			  	currentBoard = new StoryMap();
-			  	updateBoard(currentBoard, true);
-			  }
-		 });
-		}
-	);
-
 
 	//reset the board
 	initBoard();
@@ -335,4 +321,84 @@ $(document).ready(function() {
 		$('input[name=addLane]').click();
 		$('input[name=addSprint]').click();
 	}
+
+
+	//set the login form and save button actions
+	$(function() {
+		$("#loginDialog").dialog({
+			resizable: false,
+			autoOpen: false,
+			height:240,
+			modal: true,
+			buttons: {
+				"Login": function() {
+					//get username and password
+					//try to fetch an existing parse user object or create the parse user object
+					Parse.User.logIn($("input[name=username]").val(), $("input[name=password]").val(), {
+					  success: function(user) {
+						$("input[name=store]").val("save");
+						$("#loginDialog").dialog("close");
+					  },
+					  error: function(user, error) {
+						if (confirm("Failed to login. Do you want to create a new account?"))
+						{
+							var user = new Parse.User();
+							user.set("username", $("input[name=username]").val());
+							user.set("password", $("input[name=password]").val());
+						
+							user.signUp(null, {
+							  success: function(user) {
+								$("input[name=store]").val("save");
+								$("#loginDialog").dialog("close");
+							  },
+							  error: function(user, error) {
+								alert("Error: " + error.code + " " + error.message);
+							  }
+							});
+						}
+					  }
+					});
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		})
+	});
+
+	//check whether we're already logged in and update the UI accordingly
+	if (Parse.User.current())
+	{
+		$("input[name=store]").val("save");
+	}
+
+	//actions for the dual save/login button
+	$('input[name=store]').click(function () {
+	
+		if ($(this).val() == "save") //asume user is logged in, so saving is possible
+		{
+			var StoryMap = Parse.Object.extend("StoryMap");
+			var query = new Parse.Query(StoryMap);
+		
+			var currentBoard = undefined;
+			var name = window.location.search.substring(1).split("=")[1];
+		
+			$(this).attr('disabled', true).attr('value', 'updating...');
+		
+			query.get(name, {
+				  success: function(currentBoard) {
+					$('input[name=store]').attr('disabled', false).attr('value', 'save');
+					updateBoard(currentBoard, false);
+				  },
+				  error: function() {
+				  	currentBoard = new StoryMap();
+				  	updateBoard(currentBoard, true);
+				  }
+			 });
+		}
+		else //display the login form
+		{
+			$( "#loginDialog" ).dialog( "open" );
+		}
+	});
 });

@@ -1,7 +1,7 @@
 Short term:
 
-- readonly link
 - kolommen verslepen / verwisselen qua volgorde
 - icoontje
 - verwijderen lanes en sprints
 - cellen een rowid en colid geven
+- weergeven updatedAt
