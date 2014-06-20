@@ -1079,3 +1079,10 @@ div.content--buttons button {
     page-break-after: avoid;
   }
 }
+.arrows {
+  float: right;
+  cursor: pointer;
+}
+.headerCell {
+  float: left;
+}

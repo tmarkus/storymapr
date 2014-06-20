@@ -50,20 +50,20 @@ function addHeader(title)
 	var headerCell = $('<th class="cell"></th');
 
 	if (title == undefined)	title = "Header"
-	var headerCellText = $('<span style="float: left;">');
+	var headerCellText = $('<span class="headerCell"></span>');
 	headerCell.append(headerCellText.append($('<span class="title"></span>').text(title)));
 
 	//add arrows
 	if (lanes > 1)
 	{
-		var arrows = $('<span class="arrows" style="float: right;"></span>');
+		var arrows = $('<span class="arrows"></span>');
 		
 		//left arrow
 		arrows.append($("<span>&#8592; </span>").click(function() {
 			var exported = exportBoard();
 		
 			//swap arrays
-			var index = $(this).closest("th").index();
+			var index = $(this).closest("th").index(); 
 			if (index > 1)
 			{
 				swapElements(exported["header"], index, index-1);
