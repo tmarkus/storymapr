@@ -103,7 +103,7 @@ function addHeader(title)
 
 
 	//make header text editable
-	$(headerCellText).editable(function(value, settings) {
+	$(headerCellText).find(".title").editable(function(value, settings) {
 		return value;
 	},
 	{
