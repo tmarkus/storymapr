@@ -82,6 +82,7 @@ function addSprint()
 function createStory(storyText)
 {
 	var story = $('<div class="story">');
+	story.addClass(cycle[0]); //give the story a default state
 
 	var icoontjes = $('<div class="icoontjes">');
 
