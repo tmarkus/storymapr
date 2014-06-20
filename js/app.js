@@ -118,14 +118,16 @@ function createStory(storyText)
 	})
 
 	//make story text editable
-	var storyContent = $('<span class="storyText"></span>').text(storyText);
-	$(storyContent).editable(function(value, settings) {
-		return value;
-	},
-	{
+	var storyContent = $('<span class="storyText"></span>').html(storyText);
+	$(storyContent).editable(function(value, settings) {return value.replace(/\n/g, "<br>"); }, 
+		{
+			data: function(value, settings) {
+			return value.replace(/<br[\s\/]?>/gi, "\n");
+		},
 		type: 'textarea',
 		onblur: 'submit' //store changes on lost focus
 	});
+
 	//enable autogrow for the newly created textarea
 	$(storyContent).click(function(event) {
 		$(this).find("textarea").autosize();
@@ -239,7 +241,7 @@ function exportBoard()
 					}
 				});
 				
-				cell.push({'text': $(this).text(), 'state': resultState});
+				cell.push({'text': $(this).html(), 'state': resultState});
 			});
 			cells.push(cell);
 		});
