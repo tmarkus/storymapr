@@ -7,7 +7,7 @@
     min-height: 3em;
     min-width: 7rem;
     padding: 0.3rem 0.8rem;
-    padding-right: 2.5rem; 
+    padding-right: 2.7rem; 
     white-space: normal;
     overflow: hidden;
     position: relative;
@@ -45,13 +45,18 @@
     .icoontjes { display: none; }
 
     .ui-icon {
-        background-image: url(ui-lightness/images/ui-icons_ffffff_256x240.png);
+        color: fade(@white, 80%);
+        &:hover { color: fade(@white, 50%);}
     }
 }
 
 .story.designed {
-    background: @color-action-30;
-    color: @color-neutral-50;
+    background: @color-neutral-40;
+    color: @white;
+    .ui-icon {
+        color: fade(@white, 80%);
+        &:hover { color: fade(@white, 50%);}
+    }
 }
 
 

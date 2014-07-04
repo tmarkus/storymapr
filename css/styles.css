@@ -3885,7 +3885,7 @@ div.content--buttons button {
   min-height: 3em;
   min-width: 7rem;
   padding: 0.3rem 0.8rem;
-  padding-right: 2.5rem;
+  padding-right: 2.7rem;
   white-space: normal;
   overflow: hidden;
   position: relative;
@@ -3921,11 +3921,20 @@ div.content--buttons button {
   display: none;
 }
 .story.activated .ui-icon {
-  background-image: url(ui-lightness/images/ui-icons_ffffff_256x240.png);
+  color: rgba(255, 255, 255, 0.8);
+}
+.story.activated .ui-icon:hover {
+  color: rgba(255, 255, 255, 0.5);
 }
 .story.designed {
-  background: #fcbab5;
-  color: #52656e;
+  background: #86949b;
+  color: #ffffff;
+}
+.story.designed .ui-icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+.story.designed .ui-icon:hover {
+  color: rgba(255, 255, 255, 0.5);
 }
 .ui-draggable-dragging {
   font-weight: normal;
@@ -3958,13 +3967,24 @@ div.content--buttons button {
 .icoontjes {
   display: none;
   position: absolute;
-  top: 0.3rem;
-  right: 0.8rem;
-  width: 1rem;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.7rem 0.75rem;
+  right: 0;
+}
+.icoontjes .ui-icon {
+  position: relative;
+  background: none;
+  text-indent: 0;
+  color: rgba(51, 62, 66, 0.5);
+}
+.icoontjes .ui-icon:hover {
+  color: rgba(51, 62, 66, 0.2);
 }
 .icoontjes .ui-icon:before {
   position: absolute;
-  left: 0;
+  left: -4px;
   top: 0;
   right: 0;
   bottom: 0;
@@ -3978,11 +3998,8 @@ div.content--buttons button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icoontjes .ui-icon {
-  margin-right: 1px;
-}
-.icoontjes .ui-icon-circle-check {
-  margin: 0 0 2px;
+.icoontjes .ui-icon-circle-check:before {
+  content: "\e5a2";
 }
 .login--wrapper,
 .ui-dialog.ui-widget {

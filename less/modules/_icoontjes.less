@@ -3,15 +3,23 @@
 .icoontjes {
     display: none;
     position: absolute;
-    top: 0.3rem;
-    right: 0.8rem;
-    width: 1rem;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid fade(@white, 20%);
+    padding: 0.7rem 0.75rem;
+    right: 0;
 
 	.ui-icon {
+		position: relative;
+		background: none; 
+		text-indent: 0;
+		color: fade(@color-neutral-70, 50%);
+
+		&:hover { color: fade(@color-neutral-70, 20%); }
 
 	    &:before {	
 			position: absolute;
-			left: 0;
+			left: -4px;
 			top: 0;
 			right: 0;
 			bottom: 0;
@@ -25,11 +33,11 @@
 		    -webkit-font-smoothing: antialiased;
 		    -moz-osx-font-smoothing: grayscale;
 		}
+
+
 	}
 
-    .ui-icon { margin-right: 1px; }
-
-    .ui-icon-circle-check { margin: 0 0 2px; }
+    .ui-icon-circle-check:before { content: "\e5a2"; }
 }
 
 // content: "\e5a3"; 
