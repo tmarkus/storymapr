@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>gitignore/Actionscript.gitignore at master · github/gitignore</title>
+  <meta name="Description" content="A collection of useful .gitignore templates">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1">### TARGET</p>
+<p class="p1">.DS_Store</p>
+<p class="p1">*/.DS_Store</p>
+<p class="p1">*.sublime-project</p>
+<p class="p1">*.sublime-workspace</p>
+<p class="p1">.codekit-cache</p>
+<p class="p1">config.codekit</p>
+<p class="p1">js/settings.js</p>
+</body>
+</html>

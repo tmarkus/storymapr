@@ -335,65 +335,65 @@ dl.advanced dd {
 @media only screen and (min-width: 767px) {
   .l-full {
     float: left;
-    width: 97.91666666666667%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 97.91666667%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-three-fourth {
     float: left;
-    width: 64.58333333333334%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 64.58333333%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 960px) {
   .l-three-fourth {
     float: left;
-    width: 72.91666666666667%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 72.91666667%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-two-third {
     float: left;
-    width: 64.58333333333334%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 64.58333333%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-half {
     float: left;
-    width: 47.91666666666667%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 47.91666667%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-one-third {
     float: left;
-    width: 31.250000000000004%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 31.25%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-one-fourth {
     float: left;
-    width: 31.250000000000004%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 31.25%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 @media only screen and (min-width: 960px) {
   .l-one-fourth {
     float: left;
-    width: 22.916666666666668%;
-    margin-left: 1.0416666666666667%;
-    margin-right: 1.0416666666666667%;
+    width: 22.91666667%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
   }
 }
 .l-narrow {
@@ -1065,7 +1065,7 @@ div.content--buttons button {
   img {
     max-width: 100%!important;
   }
-  @page  {
+  @page {
     margin: 2cm;
   }
   p,
