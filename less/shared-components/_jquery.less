@@ -1,0 +1,18 @@
+//========== jQuery
+
+.ui-widget-overlay {
+	background-image: none;
+	.ui-widget-overlay {
+		opacity: .18;
+		background: @color-neutral-70 50% 50% repeat-x;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 100!important;
+		@media @breakpoint-two{
+			margin-left: @navigation-width;
+		}
+	}
+}

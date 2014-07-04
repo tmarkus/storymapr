@@ -6,12 +6,13 @@
 // The base font-size, all other elements will adjust to this value
 @font-size: 15px;
 
+@font-size-5: 0.6rem;
 @font-size-10: 0.733rem;
 @font-size-20: 0.867rem;
 @font-size-30: 1rem; // Default
 @font-size-40: 1.2rem;
 @font-size-50: 1.6rem;
-
+@font-size-60: 1.75rem;
 
 // The grid columns will be used in the grid mixin, 48 is standard
 @grid-columns: 48;
@@ -20,12 +21,12 @@
 @max-width: (1400px / @font-size) + rem;
 
 // Use the vertical-spacing on margins and paddings
-@vertical-spacing: 1.5rem;
 @spacing: 1.5rem;
 
 // Adjust the border-radius
 @border-radius-1: 2px;
 @border-radius-2: 4px;
+@border-radius-3: 6px;
 
 // Width of the main navigation on desktop
 @navigation-width: 16rem;
@@ -41,31 +42,33 @@
 // Add your own color variables
 // use color: lighten(@color-neutral, 20%), color: darken(@color-neutral, 20%) or color: rgba(@color-neutral, 0.5) to adjust colors
 
-@color-neutral-5: lighten(#cbd1cf, 16%);
-@color-neutral-10: #ebeeed; // gray lighten 12%
-@color-neutral-15: lighten(#cbd1cf, 6%);
-@color-neutral-20: #cbd1cf; // gray
-@color-neutral-25: #86949b;
-@color-neutral-30: #49636f; // color-brand old
-@color-neutral-40: #3b4d55;
-@color-neutral-50: #333e42; // black
-@color-neutral-60: #1b2224; // black
+@color-neutral-2: lighten(@color-neutral-30, 18%);
+@color-neutral-5: lighten(@color-neutral-30, 16%);
+@color-neutral-10: #E9EAEB; // gray lighten 12%
+@color-neutral-20: #D6DADC;
+@color-neutral-30: #C3CACE; // gray
+@color-neutral-40: #86949B;
+@color-neutral-50: #52656E; // Default
+@color-neutral-60: #404E54;
+@color-neutral-70: #333E42; // black
+@color-neutral-90: #1B2224; // black
 
-@color-brand-10: lighten(#1ca382, 20%);
-@color-brand-20: lighten(#1ca382, 7%);
-@color-brand-30: #1ca382; // Default
-@color-brand-40: darken(#1ca382, 7%);
-@color-brand-50: darken(#1ca382, 20%);
+@color-brand-20: #baf0e3;
+@color-brand-30: lighten(@color-brand-50, 20%);
+@color-brand-40: lighten(@color-brand-50, 7%);
+@color-brand-50:  #1ca382; // Default
+@color-brand-60: darken(@color-brand-50, 7%);
+@color-brand-70: darken(@color-brand-50, 20%);
+ 
+@color-action-30: lighten(@color-action-50, 20%);
+@color-action-40: lighten(@color-action-50, 7%);
+@color-action-50: #f85e53; // Default
+@color-action-60: darken(@color-action-50, 7%);
+@color-action-70: darken(@color-action-50, 20%);
 
-@color-action-10: lighten(#f85e53, 20%);
-@color-action-20: lighten(#f85e53, 7%);
-@color-action-30: #f85e53; // Default
-@color-action-40: darken(#f85e53, 7%);
-@color-action-50: darken(#f85e53, 20%);
-
-@color-success: @color-brand-30;
-@color-alert: @color-action-30;
-@color-alert-40: darken(@color-action-30, 20%);
+@color-success: #1ca382;
+@color-alert: #f85e53;
+@color-alert-40: darken(@color-alert, 40%);
 @color-warning: #f3e8bd;
 
 @white: #fff;

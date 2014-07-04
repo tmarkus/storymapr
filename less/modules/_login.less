@@ -1,0 +1,96 @@
+//========== Login
+
+.login--wrapper,
+.ui-dialog.ui-widget {
+	padding: 0;
+	border: 1px solid @color-neutral-50;
+	border-radius: @border-radius-3;
+	overflow: hidden;
+}
+
+.login--header,
+.ui-widget-header.ui-dialog-titlebar {
+	padding: .4rem 0.3rem 0.4rem 1rem;
+	background-image: none;
+	border-radius: 0;
+	background: @color-neutral-50;
+	border: none;
+
+	button.ui-button {
+		background: none;
+		border: none;
+		position: relative;
+		color: fade(@white, 70%);
+		margin: 0;
+		width: 9%;
+		&:hover { color: @white; }
+	}
+
+	span.ui-icon {
+		background: none;
+		position: relative;
+		left: auto;
+		margin: 0;
+		padding: 0;
+		text-indent: 0;
+
+		&:before {
+			content: "\e5a3"; 
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			font-family: 'Flaticons Stroke';
+		    speak: none;
+		    font-size: 22px;
+		    font-style: normal;
+		    font-weight: normal;
+		    visibility: visible;
+		    line-height: 1;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+			
+		}
+	}
+}
+
+div.login.ui-dialog-content {
+	padding: @spacing / 2 0.5rem;
+	height: auto!important;
+
+	input {
+		width: 100%;
+		border: none;
+	}
+
+	+ div {
+		margin: 0;
+		padding: 0.5rem;
+
+		button { 
+			margin: 0; 
+			float: right;
+
+    		span { padding: 0; }
+  		}
+
+		button:first-of-type { 
+			.button-detail;
+		}
+
+		button:nth-of-type(2) { 
+			.button-detail;
+			background: none;
+			color: @color-brand-50;
+			font-size: @font-size-20;
+			border-color: transparent;
+			text-transform: uppercase;
+			font-weight: 600;
+			&:hover, &:active, &:focus {
+				background: none;
+				color: @color-brand-70;
+			}
+		}
+	}
+}

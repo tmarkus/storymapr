@@ -71,16 +71,16 @@ input[type=button].button-detail,
 button.button-detail {
     .include-button;
     color: @white;
-    .mixin-gradient(top, @color-brand-30, @color-brand-40);
-    border: 2px solid @color-brand-40;
+    .mixin-gradient(top, @color-brand-40, @color-brand-50);
+    border: 2px solid @color-brand-50;
     -webkit-font-smoothing: antialiased;
     &:hover {
-        background: @color-brand-40;
+        background: @color-brand-50;
         color: @white;
     }
     &:active{
-        background: @color-brand-50;
-        border-color: @color-brand-50;
+        background: @color-brand-60;
+        border-color: @color-brand-60;
     }
 }
 
@@ -91,7 +91,7 @@ input[type=button].button-action,
 button.button-action {
     .include-button;
     color: @white;
-    .mixin-gradient(top, @color-action-30, @color-action-40);
+    .mixin-gradient(top, @color-action-50, @color-action-60);
     border: 2px solid @color-action-40;
     -webkit-font-smoothing: antialiased;
     &:hover {
@@ -112,15 +112,14 @@ button.button-soft {
     .include-button;
     color: @color-neutral-10;
     background: transparent;
-    border: 2px solid @color-brand-30;
+    border: 2px solid @color-brand-50;
     &:hover {
-        background: @color-brand-40;
+        background: @color-brand-50;
         color: @white;
-        border: 2px solid @color-brand-40;
+        border: 2px solid @color-brand-50;
     }
     &:active {
-       background: @color-brand-50;
-        border-color: @color-brand-50;
-        border: 2px solid @color-brand-40;
+        background: @color-brand-50;
+        border: 2px solid @color-brand-50;
     }
 }

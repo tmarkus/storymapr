@@ -1,0 +1,83 @@
+// =========== Tables
+
+.story {
+    .mixin-display-flex;
+    .mixin-flex-direction(row);
+    .mixin-align-items(center);
+    min-height: 3em;
+    min-width: 7rem;
+    padding: 0.3rem 0.8rem;
+    padding-right: 2.5rem; 
+    white-space: normal;
+    overflow: hidden;
+    position: relative;
+    background: @color-neutral-20;
+    color: @color-neutral-50;
+    margin-bottom: 0.2rem;
+    cursor: pointer;
+
+    &:last-of-type,
+    &:only-child {
+        margin-bottom: 0;
+    }
+
+    span {
+        display: block;
+    }
+
+    &:hover {
+        background: @color-neutral-20;
+        .icoontjes {
+            display: block; 
+        }
+    }
+}
+
+.story.activated {
+    color: @white;
+    background-color: @color-brand-50;
+
+    &:hover {
+        background: @color-brand-60;
+        .icoontjes { display: block; }
+    }
+
+    .icoontjes { display: none; }
+
+    .ui-icon {
+        background-image: url(ui-lightness/images/ui-icons_ffffff_256x240.png);
+    }
+}
+
+.story.designed {
+    background: @color-action-30;
+    color: @color-neutral-50;
+}
+
+
+.ui-draggable-dragging {
+    font-weight: normal;
+    color: @color-neutral-60;
+    border: 1px solid @color-neutral-60;
+    opacity: 0.8;
+    
+    .icoontjes {
+        display: none!important;
+    }
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+    border: 0;
+    background: @color-action-30;
+    font-weight: normal;
+    color: @color-neutral-60;
+    .icoontjes {
+        display: none!important;
+    }
+}
+

@@ -1,0 +1,297 @@
+// =========== Forms
+
+input[type=search] { -webkit-appearance: textfield; }
+input[type=search]::-webkit-search-decoration { -webkit-appearance: none; }
+input::-ms-clear { display:none; }
+
+input::-webkit-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+input::-moz-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+input:-ms-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+input:input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+textarea::-webkit-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+textarea::-moz-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+textarea:-ms-input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+textarea:input-placeholder {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+select[disabled] {
+    font-weight: 400;
+    color: @color-neutral-40;
+}
+
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=email],
+input[type=tel],
+input[type=url],
+textarea,
+select {
+    -webkit-appearance: none;
+    border: 1px solid @color-neutral-30;
+    border-radius: @border-radius-1;
+    box-shadow: inset 0px 1px 2px @color-neutral-10;
+    color: @color-neutral-60;
+    display: block;
+    font-family: @font-base;
+    font-size: @font-size-30;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0.5em;
+    vertical-align: baseline;
+    width: 100%;
+    min-width: 6rem;
+
+    &:focus {
+        border-color: @color-neutral-40;
+        color: @color-neutral-70;
+        outline: 0;
+    }
+    &:disabled {
+        box-shadow: none;
+        background: @color-neutral-5;
+        color: @color-neutral-40;
+    }
+}
+
+textarea {
+    overflow: auto;
+    resize: vertical;
+    vertical-align: top;
+    display: block;
+    width: 100%;
+}
+
+form {  }
+
+fieldset {  }
+
+legend {
+    border: 0;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    font-size: @font-size-50;
+}
+
+ul.form {
+    clear: both;
+    padding: 0 !important;
+    list-style: none;
+    margin: 0 0 @spacing 0;
+
+    > li {
+        padding: 0.75rem;
+        border-bottom: 2px solid @color-neutral-10;
+        .mixin-clearfix;
+
+        &:last-child { border-bottom: 0; }
+        @media @breakpoint-two { padding: 1.5rem; }
+    }
+
+    > li > label {
+        clear: left;
+        // cursor: pointer;
+        display: block;
+        font-weight: 400;
+        padding-top: 0.6rem;
+        text-align: left;
+        color: @color-neutral-40;
+        overflow: hidden;
+        word-break: break-all;
+
+        @media @breakpoint-one { .mixin-grid(16, 0, 1); }
+
+        // &:hover { color: @color-neutral-70; }
+    }
+
+    div.form--fields {
+        position: relative;
+
+        @media @breakpoint-one { .mixin-grid(32, 0, 0); }
+
+        p, small {
+            display: block;
+            margin: 0.25rem 0;
+        }
+        p.form--description { margin: 0.6rem 0; }
+
+        > i {
+            position: absolute;
+            top: 5px;
+            width: 2rem;
+            height: 2rem;
+            line-height: 2rem;
+            font-size: 1rem;
+            text-align: center;
+            color: @color-neutral-30;
+            right: 5px;
+            padding-left: 3px;
+        }
+
+        input:focus ~ i {
+            color: @color-neutral-50;
+        }
+
+        select ~ i.form--arrows {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 8px;
+            height: 11px;
+            background: @white;
+            pointer-events: none;
+            &:after,
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                border-right: .3rem solid transparent;
+                border-left: .3rem solid transparent;
+            }
+            &:after {
+                bottom: 0;
+                border-top: .3rem solid @color-neutral-30;
+            }
+            &:before {
+                top: 0;
+                border-bottom: .3rem solid @color-neutral-30;
+            }
+        }
+    }
+}
+
+.form--checklist {
+    list-style: none;
+    margin: 0.6rem 0;
+    li {
+        margin: 0.5rem 0;
+    }
+    li.form--checklist-inline {
+        display: inline-block;
+        margin-right: 1.2rem;
+    }
+    input {
+        display: inline;
+        margin-right: 0.8rem;
+    }
+    label {
+        .mixin-grid-reset;
+        font-weight: normal;
+        &:hover {
+            color: @color-neutral-60;
+            cursor: pointer;
+        }
+    }
+}
+
+ul.form--checklist-inline {
+    .form--checklist;
+    li {
+        display: inline-block;
+        margin: 0;
+    }
+    li ~ li {
+        margin-left: 1.2rem;
+    }
+}
+
+li.form--is-required {
+    label:after {
+        content: '*';
+        color: @color-alert;
+        margin-left: 0.25rem;
+        font-size: @font-size-10;
+        position: relative;
+        top: -4px;
+    }
+}
+
+li.form--error,
+div.form--error {
+    label {
+        color: @color-alert !important;
+        &:hover { color: @color-alert-40; }
+    }
+    input[type=text],
+    input[type=number],
+    input[type=password],
+    input[type=search],
+    input[type=email],
+    input[type=tel],
+    input[type=url],
+    textarea,
+    select {
+        border: 1px solid @color-alert;
+        &:focus { border: 1px solid @color-alert; }
+    }
+    ul.form--errors {
+        color: @color-alert;
+        list-style: none;
+        margin: 0 0 .35rem .35rem;
+        li { font-size: @font-size-20; }
+    }
+}
+
+div.form--buttons {
+    padding: 0.75rem;
+    @media @breakpoint-two {
+        padding: 1.5rem;
+    }
+}
+
+span.form--fields-avatar {
+     display: block;
+     height: 5rem;
+     width: 5rem;
+     background-size: cover;
+     background-position: 50% 50%;
+     border-radius: @border-radius-1;
+     box-shadow: inset 0px 0px 4px 0 fade(#000, 25%);
+}
+
+div.form--upload {
+    padding-top: 0.15rem;
+    input {
+        cursor: pointer;
+        display: inline-block;
+        position: absolute;
+        height: 3rem;
+        width: 100%;
+        top: 0;
+        opacity: 0;
+    }
+}
+div.form--uploads {
+    padding-top: @spacing / 2;
+    p { margin-bottom: @spacing / 4; }
+    i { 
+        margin-left: @spacing / 4; 
+        vertical-align: middle; 
+        color: @color-neutral-40;
+    }
+}

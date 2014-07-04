@@ -2,6 +2,10 @@
 
 .is-hidden { display: none !important; }
 .is-hidden, .is-invisible { visibility: hidden !important; }
+.is-hidden-mobile {
+	display: none;
+	@media @breakpoint-one {  display: inline-block; }
+}
 
 .is-active, .is-visible { display: block; }
 
@@ -16,16 +20,19 @@
     font-size: @font-size-20;
 }
 
+.is-inactive {
+	color: @color-neutral-40 !important;
 
-.is-inactive { 
-	color: @color-neutral-25 !important;
-
-	&:hover { 
-		color: @color-neutral-25 !important; 
+	&:hover {
+		color: @color-neutral-40 !important;
 		background: initial !important;
 		cursor: text;
 	}
 	i.flaticon:before {
-		margin-right: 0.35rem;
+		margin-left: 0.35rem;
 	}
+}
+
+.is-alt-text {
+    display: none;
 }
