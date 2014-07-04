@@ -21,9 +21,14 @@ table.table {
             border-left: 0;
         }
 
+        &:hover .arrows {
+            display: block;
+        }
+
         .arrows {
             float: right;
             cursor: pointer;
+            display: none;
         }
 
         .headerCell {
@@ -56,10 +61,14 @@ table.table {
                 background: transparent;
             }
 
-            .activated {
+            .designed {
                 background: @color-neutral-50;
                 margin: 0;
 	       }
+           .activated {
+                color: @color-neutral-50;
+                text-decoration: line-through;
+           }
         }
     }
 

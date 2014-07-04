@@ -514,9 +514,13 @@ table.table th {
 table.table th:first-of-type {
   border-left: 0;
 }
+table.table th:hover .arrows {
+  display: block;
+}
 table.table th .arrows {
   float: right;
   cursor: pointer;
+  display: none;
 }
 table.table th .headerCell {
   float: left;
@@ -545,9 +549,13 @@ table.table td:first-of-type .story {
   padding-bottom: 0.75rem;
   background: transparent;
 }
-table.table td:first-of-type .activated {
+table.table td:first-of-type .designed {
   background: #52656e;
   margin: 0;
+}
+table.table td:first-of-type .activated {
+  color: #52656e;
+  text-decoration: line-through;
 }
 table.table tr:first-child td {
   box-shadow: 0 0 0;
