@@ -234,6 +234,7 @@ function importBoard(data)
 {
 	//set the title
 	$("#title").text(data["title"]);
+	$("head title").text(data["title"]);
 	
 	//set the headers again
 	jQuery.each(data["header"], function(i, val) {
@@ -330,10 +331,13 @@ $(document).ready(function() {
 
 	function updateBoard(currentBoard, newBoard)
 	{
-		//readable by anyone, but only writeable by the loggedIn user
-		var mapACL = new Parse.ACL(Parse.User.current());
-		mapACL.setPublicReadAccess(true);
-		currentBoard.setACL(mapACL);
+		if (newBoard)
+		{
+			//readable by anyone, but only writeable by the loggedIn user
+			mapACL = new Parse.ACL(Parse.User.current());
+			mapACL.setPublicReadAccess(true);
+			currentBoard.setACL(mapACL);
+		}
 
 		currentBoard.save({data: exportBoard()}, {
 			success: function(currentBoard) {
