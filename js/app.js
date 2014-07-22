@@ -58,6 +58,32 @@ function addHeader(title)
 	{
 		var arrows = $('<span class="arrows"></span>');
 		
+		
+		//allow dragging of column headers (in order to remove a column)
+		headerCell.draggable({
+					greedy: true,
+					start: function() {
+						$(this).find(".title").editable("disabled");
+						createRemoveArea();
+						$("#removeArea").droppable({
+							//hoverClass: "ui-state-hover",
+							greedy: true,
+							drop: function( event, ui ) {
+								var draggedHeader = $(".ui-draggable-dragging");
+								removeLane(draggedHeader);
+								$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ deleteRemoveArea(); });
+							}
+						});
+					},
+					stop: function() {
+						deleteRemoveArea();
+						$(this).find(".title").editable("enabled");
+					},
+				});
+
+		
+		
+		
 		//left arrow
 		arrows.append($("<span>&#8592; </span>").click(function() {
 			var exported = exportBoard();
@@ -120,6 +146,22 @@ function addHeader(title)
 		$(this).append(createCell());	
 	});
 }
+
+function removeLane(removeLaneHeader)
+{
+	var index = $(removeLaneHeader).index();
+	var exported = exportBoard();
+	
+	exported["header"].splice(index,1);
+	$.each(exported["cells"], function(row_id, value) {
+		exported["cells"][row_id].splice(index, 1 );
+	});
+
+	//reload board
+	initBoard();
+	importBoard(exported);
+}
+
 
 function addSprint()
 {
@@ -198,10 +240,8 @@ function createStory(storyText)
 	story.draggable({
 						greedy: true,
 						start: function() {
-							var removeArea = $('<div class="remove-area--wrapper" id="removeArea"><div class="remove-area">Drag here to remove</div></div>');
-							$("body").append(removeArea);
 							$(this).find(".storyText").editable("disabled");
-						
+							createRemoveArea();
 							$("#removeArea").droppable({
 								//hoverClass: "ui-state-hover",
 								greedy: true,
@@ -214,13 +254,25 @@ function createStory(storyText)
 							});
 						},
 						stop: function() {
-							$("#removeArea").remove();
+							deleteRemoveArea();
 							$(this).find(".storyText").editable("enabled");
 						},
 					});
 
 	return story;
 }
+
+function createRemoveArea()
+{
+							var removeArea = $('<div class="remove-area--wrapper" id="removeArea"><div class="remove-area">Drag here to remove</div></div>');
+							$("body").append(removeArea);
+}
+
+function deleteRemoveArea()
+{
+	$("#removeArea").remove();
+}
+
 
 function initBoard()
 {
