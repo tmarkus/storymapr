@@ -350,65 +350,65 @@ dl.advanced dd + dd {
 @media only screen and (min-width: 767px) {
   .l-full {
     float: left;
-    width: 97.91666667%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 97.91666666666667%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-three-fourth {
     float: left;
-    width: 64.58333333%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 64.58333333333334%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 960px) {
   .l-three-fourth {
     float: left;
-    width: 72.91666667%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 72.91666666666667%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-two-third {
     float: left;
-    width: 64.58333333%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 64.58333333333334%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-half {
     float: left;
-    width: 47.91666667%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 47.91666666666667%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-one-third {
     float: left;
-    width: 31.25%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 31.250000000000004%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 767px) {
   .l-one-fourth {
     float: left;
-    width: 31.25%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 31.250000000000004%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 @media only screen and (min-width: 960px) {
   .l-one-fourth {
     float: left;
-    width: 22.91666667%;
-    margin-left: 1.04166667%;
-    margin-right: 1.04166667%;
+    width: 22.916666666666668%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
   }
 }
 .l-narrow {
@@ -984,9 +984,9 @@ ul.form > li > label {
 @media only screen and (min-width: 590px) {
   ul.form > li > label {
     float: left;
-    width: 31.25%;
+    width: 31.250000000000004%;
     margin-left: 0%;
-    margin-right: 2.08333333%;
+    margin-right: 2.0833333333333335%;
   }
 }
 ul.form div.form--fields {
@@ -995,7 +995,7 @@ ul.form div.form--fields {
 @media only screen and (min-width: 590px) {
   ul.form div.form--fields {
     float: left;
-    width: 66.66666667%;
+    width: 66.66666666666667%;
     margin-left: 0%;
     margin-right: 0%;
   }
@@ -4215,7 +4215,7 @@ div.login.ui-dialog-content + div button:nth-of-type(2):focus {
   img {
     max-width: 100%!important;
   }
-  @page {
+  @page  {
     margin: 2cm;
   }
   p,
@@ -4228,4 +4228,14 @@ div.login.ui-dialog-content + div button:nth-of-type(2):focus {
   h3 {
     page-break-after: avoid;
   }
+}
+.sprint_arrows {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 3em;
+}
+.row .cell:first-child:hover .sprint_arrows {
+  display: block;
+  transition-delay: 1s;
 }

@@ -1,4 +1,5 @@
 var lanes = 0; //number of lanes	
+var sprints = 0; //number of sprints
 var default_story_text = "My cat ate my homework."
 
 var cycle = ["none", "designed", "activated"]; //possible states a story can be in
@@ -21,6 +22,38 @@ function createCell()
 			event.stopImmediatePropagation();
 		}
 	});
+
+	var arrows = $('<div class="sprint_arrows"/>');
+	arrows.append($('<span class="uparrow">&uarr;</span>').click(function() {
+			var exported = exportBoard();
+		
+			//swap arrays
+			var index = $(this).closest("tr").index(); 
+			if (index > 0)
+			{
+				swapElements(exported["cells"], index, index-1);
+			}
+
+			//reload board
+			initBoard();
+			importBoard(exported);
+	}));
+	arrows.append($('<span class="downarrow">&darr;</span>').click(function() {
+			var exported = exportBoard();
+		
+			//swap arrays
+			var index = $(this).closest("tr").index(); 
+			if (index < sprints - 1)
+			{
+				swapElements(exported["cells"], index, index+1);
+			}
+
+			//reload board
+			initBoard();
+			importBoard(exported);
+	}));
+
+	cell.append(arrows);
 
 	//add a story to a cell
 	cell.click(function() {
@@ -56,9 +89,6 @@ function addHeader(title)
 	//add arrows
 	if (lanes > 1)
 	{
-		var arrows = $('<span class="arrows"></span>');
-		
-		
 		//allow dragging of column headers (in order to remove a column)
 		headerCell.draggable({
 					greedy: true,
@@ -82,8 +112,8 @@ function addHeader(title)
 				});
 
 		
-		
-		
+		var arrows = $('<span class="arrows"></span>');
+
 		//left arrow
 		arrows.append($("<span>&#8592; </span>").click(function() {
 			var exported = exportBoard();
@@ -165,6 +195,8 @@ function removeLane(removeLaneHeader)
 
 function addSprint()
 {
+	sprints = sprints + 1;
+	
 	//add additional cells for the new row
 	var row = $('<tr class="row"></tr>');
 
@@ -277,6 +309,7 @@ function deleteRemoveArea()
 function initBoard()
 {
 		lanes = 0;
+		sprints = 0;
 		$("#board").empty();
 		$("#board").append($('<thead id="thead"></div>').append('<tr class="row"></tr>'));
 		$("#board").append($('<tbody id="tbody">'));
