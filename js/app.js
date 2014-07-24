@@ -1,6 +1,7 @@
 var lanes = 0; //number of lanes	
 var sprints = 0; //number of sprints
 var default_story_text = "My cat ate my homework."
+var enabled = false;
 
 var cycle = ["none", "designed", "activated"]; //possible states a story can be in
 
@@ -8,59 +9,47 @@ function createCell()
 {
 	var cell = $('<td class="cell"></td>');
 
-	cell.droppable({
-		hoverClass: "ui-state-hover",
-		greedy: true,
-		drop: function( event, ui ) {
-			var draggedStory = $(".ui-draggable-dragging");
+	if (enabled)
+	{
+		cell.droppable({
+			hoverClass: "ui-state-hover",
+			greedy: true,
+			drop: function( event, ui ) {
+				var draggedStory = $(".ui-draggable-dragging");
 
-			var e = draggedStory.detach();
-			e.removeAttr("style");				
-			e.draggable();
+				var e = draggedStory.detach();
+				e.removeAttr("style");				
+				e.draggable();
 
-			$(this).append(e);
-			event.stopImmediatePropagation();
-		}
-	});
-
-	var arrows = $('<div class="sprint_arrows"/>');
-	arrows.append($('<span class="uparrow">&uarr;</span>').click(function() {
-			var exported = exportBoard();
-		
-			//swap arrays
-			var index = $(this).closest("tr").index(); 
-			if (index > 0)
-			{
-				swapElements(exported["cells"], index, index-1);
+				$(this).append(e);
+				event.stopImmediatePropagation();
 			}
+		});
 
-			//reload board
-			initBoard();
-			importBoard(exported);
-	}));
-	arrows.append($('<span class="downarrow">&darr;</span>').click(function() {
-			var exported = exportBoard();
 		
-			//swap arrays
-			var index = $(this).closest("tr").index(); 
-			if (index < sprints - 1)
-			{
-				swapElements(exported["cells"], index, index+1);
+		var arrows = $('<div class="sprint_actions"/>');
+		arrows.append($('<span class="add_sprint_here">+ add sprint</span>').click(function(event) {
+				event.stopPropagation();
+				var exported = exportBoard();
+		
+				//add sprint
+				var index = $(this).closest("tr").index(); 
+				exported["cells"].splice(index+1, 0, []);
+				
+				//reload board
+				initBoard();
+				importBoard(exported);
+		}));
+
+		cell.append(arrows);
+	
+		//add a story to a cell
+		cell.click(function() {
+			if ($("#board").find("textarea").size() == 0) { //only add it if we don't have an open textarea
+				$(this).append(createStory(default_story_text));
 			}
-
-			//reload board
-			initBoard();
-			importBoard(exported);
-	}));
-
-	cell.append(arrows);
-
-	//add a story to a cell
-	cell.click(function() {
-		if ($("#board").find("textarea").size() == 0) { //only add it if we don't have an open textarea
-			$(this).append(createStory(default_story_text));
-		}
-	});
+		});
+	}
 
 	return cell;
 }
@@ -85,90 +74,90 @@ function addHeader(title)
 	if (title == undefined)	title = "Header"
 	var headerCellText = $('<span class="headerCell"></span>');
 	headerCell.append(headerCellText.append($('<span class="title"></span>').text(title)));
+	$("#board #thead .row").append(headerCell);
 
 	//add arrows
-	if (lanes > 1)
+	if (enabled)
 	{
-		//allow dragging of column headers (in order to remove a column)
-		headerCell.draggable({
-					greedy: true,
-					start: function() {
-						$(this).find(".title").editable("disabled");
-						createRemoveArea();
-						$("#removeArea").droppable({
-							//hoverClass: "ui-state-hover",
-							greedy: true,
-							drop: function( event, ui ) {
-								var draggedHeader = $(".ui-draggable-dragging");
-								removeLane(draggedHeader);
-								$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ deleteRemoveArea(); });
-							}
-						});
-					},
-					stop: function() {
-						deleteRemoveArea();
-						$(this).find(".title").editable("enabled");
-					},
-				});
+		if (lanes > 1)
+		{
+			//allow dragging of column headers (in order to remove a column)
+			headerCell.draggable({
+						greedy: true,
+						start: function() {
+							$(this).find(".title").editable("disabled");
+							createRemoveArea();
+							$("#removeArea").droppable({
+								//hoverClass: "ui-state-hover",
+								greedy: true,
+								drop: function( event, ui ) {
+									var draggedHeader = $(".ui-draggable-dragging");
+									removeLane(draggedHeader);
+									$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ deleteRemoveArea(); });
+								}
+							});
+						},
+						stop: function() {
+							deleteRemoveArea();
+							$(this).find(".title").editable("enabled");
+						},
+					});
 
 		
-		var arrows = $('<span class="arrows"></span>');
+			var arrows = $('<span class="arrows"></span>');
 
-		//left arrow
-		arrows.append($("<span>&#8592; </span>").click(function() {
-			var exported = exportBoard();
+			//left arrow
+			arrows.append($("<span>&#8592; </span>").click(function() {
+				var exported = exportBoard();
 		
-			//swap arrays
-			var index = $(this).closest("th").index(); 
-			if (index > 1)
-			{
-				swapElements(exported["header"], index, index-1);
+				//swap arrays
+				var index = $(this).closest("th").index(); 
+				if (index > 1)
+				{
+					swapElements(exported["header"], index, index-1);
 			
-				$.each(exported["cells"], function(row_id, value) {
-					swapElements(exported["cells"][row_id], index, index-1);
-				});
-			}
+					$.each(exported["cells"], function(row_id, value) {
+						swapElements(exported["cells"][row_id], index, index-1);
+					});
+				}
 
-			//reload board
-			initBoard();
-			importBoard(exported);
-		}));
+				//reload board
+				initBoard();
+				importBoard(exported);
+			}));
 		
-		//right arrow
-		arrows.append($("<span>&#8594;</span>").click(function() {
-			var exported = exportBoard();
+			//right arrow
+			arrows.append($("<span>&#8594;</span>").click(function() {
+				var exported = exportBoard();
 			
-			//swap arrays
-			var index = $(this).closest("th").index();
-			if (index < lanes-1)
-			{
-				swapElements(exported["header"], index, index+1);
+				//swap arrays
+				var index = $(this).closest("th").index();
+				if (index < lanes-1)
+				{
+					swapElements(exported["header"], index, index+1);
 			
-				$.each(exported["cells"], function(row_id, value) {
-					swapElements(exported["cells"][row_id], index, index+1);
-				});
-			}
+					$.each(exported["cells"], function(row_id, value) {
+						swapElements(exported["cells"][row_id], index, index+1);
+					});
+				}
 
-			//reload board
-			initBoard();
-			importBoard(exported);
-		}));
+				//reload board
+				initBoard();
+				importBoard(exported);
+			}));
 		
-		headerCell.append(arrows);
+			headerCell.append(arrows);
+		}
+	
+		//make header text editable
+		$(headerCellText).find(".title").editable(function(value, settings) {
+			return value;
+		},
+		{
+			type: 'text',
+			onblur: 'submit' //store changes on lost focus
+		});
 	}
-
-
-	//make header text editable
-	$(headerCellText).find(".title").editable(function(value, settings) {
-		return value;
-	},
-	{
-		type: 'text',
-		onblur: 'submit' //store changes on lost focus
-	});
-
-
-	$("#board #thead .row").append(headerCell);
 
 
 	//add a new cell to each row				
@@ -214,82 +203,90 @@ function createStory(storyText)
 	var story = $('<div class="story">');
 	story.addClass(cycle[0]); //give the story a default state
 
-	var icoontjes = $('<div class="icoontjes">');
+	if (enabled)
+	{
+		var icoontjes = $('<div class="icoontjes">');
 
-	//color switch
-	var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
-	color.click(function(event) {
-		var story = $(this).parent().parent();
+		//color switch
+		var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
+		color.click(function(event) {
+			var story = $(this).parent().parent();
 		
-		for(var i=0; i < cycle.length; i++)
-		{
-			if ( story.hasClass(cycle[i]) ) {
-				if (i == cycle.length-1)
-				{
-					story.addClass("none");
+			for(var i=0; i < cycle.length; i++)
+			{
+				if ( story.hasClass(cycle[i]) ) {
+					if (i == cycle.length-1)
+					{
+						story.addClass("none");
+					}
+					else
+					{
+						story.addClass(cycle[i+1]);
+					}
+					story.removeClass(cycle[i]);
+					break;
 				}
-				else
-				{
-					story.addClass(cycle[i+1]);
-				}
-				story.removeClass(cycle[i]);
-				break;
 			}
-		}
 
-		event.stopPropagation();
-	});
-	icoontjes.append(color);
+			event.stopPropagation();
+		});
+		icoontjes.append(color);
 
-	//click on a story -> do nothing
-	//required such that we don't add a story in the same cell accidentally
-	story.click(function(event) {
-		event.stopPropagation();
-	})
+		//click on a story -> do nothing
+		//required such that we don't add a story in the same cell accidentally
+		story.click(function(event) {
+			event.stopPropagation();
+		})
+
+		story.append(icoontjes);
+	}
 
 	//make story text editable
 	var storyContent = $('<span class="storyText"></span>').html(storyText);
-	$(storyContent).editable(function(value, settings) {return value.replace(/\n/g, "<br>"); }, 
-		{
-			data: function(value, settings) {
-			return value.replace(/<br[\s\/]?>/gi, "\n");
-		},
-		type: 'textarea',
-		onblur: 'submit' //store changes on lost focus
-	});
-
-	//enable autogrow for the newly created textarea
-	$(storyContent).click(function(event) {
-		$(this).find("textarea").autosize();
-	});
-
-
-	//add icons	
-	story.append(icoontjes);
 	story.append(storyContent);
 
-	//temporarily disable editable clicks when dragging a story
-	story.draggable({
-						greedy: true,
-						start: function() {
-							$(this).find(".storyText").editable("disabled");
-							createRemoveArea();
-							$("#removeArea").droppable({
-								//hoverClass: "ui-state-hover",
-								greedy: true,
-								drop: function( event, ui ) {
-									var draggedStory = $(".ui-draggable-dragging");
-									draggedStory.remove();
+	
+	if (enabled)
+	{
+		$(storyContent).editable(function(value, settings) {return value.replace(/\n/g, "<br>"); }, 
+			{
+				data: function(value, settings) {
+				return value.replace(/<br[\s\/]?>/gi, "\n");
+			},
+			type: 'textarea',
+			onblur: 'submit' //store changes on lost focus
+		});
+
+		//enable autogrow for the newly created textarea
+		$(storyContent).click(function(event) {
+			$(this).find("textarea").autosize();
+		});
+
+
+
+		//temporarily disable editable clicks when dragging a story
+		story.draggable({
+							greedy: true,
+							start: function() {
+								$(this).find(".storyText").editable("disabled");
+								createRemoveArea();
+								$("#removeArea").droppable({
+									//hoverClass: "ui-state-hover",
+									greedy: true,
+									drop: function( event, ui ) {
+										var draggedStory = $(".ui-draggable-dragging");
+										draggedStory.remove();
 									
-									$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ $("#removeArea").remove(); });
-								}
-							});
-						},
-						stop: function() {
-							deleteRemoveArea();
-							$(this).find(".storyText").editable("enabled");
-						},
-					});
+										$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ $("#removeArea").remove(); });
+									}
+								});
+							},
+							stop: function() {
+								deleteRemoveArea();
+								$(this).find(".storyText").editable("enabled");
+							},
+						});
+	}
 
 	return story;
 }
@@ -308,6 +305,28 @@ function deleteRemoveArea()
 
 function initBoard()
 {
+		//should we enable edit functionality?
+		enabled = (!Parse.User.current() && (name == undefined)) || (Parse.User.current() && (name != undefined))
+		
+		if (enabled)
+		{
+			$('input[name=addSprint]').click(function() {
+				addSprint();				
+			});
+
+			$('input[name=addLane]').click(function() {
+				addHeader();
+			});		
+
+			//make title editable
+			$("#title").editable(function(value, settings) {
+				return value;
+			},
+			{
+				type: 'text'
+			});
+		}
+		
 		lanes = 0;
 		sprints = 0;
 		$("#board").empty();
@@ -398,22 +417,13 @@ function exportBoard()
 }
 
 $(document).ready(function() {
-	$('input[name=addSprint]').click(function() {
-		addSprint();				
-	});
+	// check if the url specifies a storymap id
+	// YES? -> import it
+	var name = window.location.search.substring(1).split("=")[1];
 
-	$('input[name=addLane]').click(function() {
-		addHeader();
-	});		
-
-	//make title editable
-	$("#title").editable(function(value, settings) {
-		return value;
-	},
-	{
-		type: 'text'
-	});
-
+	//reset the board
+	initBoard();
+	
 	function updateBoard(currentBoard, newBoard)
 	{
 		if (newBoard)
@@ -440,12 +450,7 @@ $(document).ready(function() {
 		});
 	}
 
-	//reset the board
-	initBoard();
 
-	// check if the url specifies a storymap id
-	// YES? -> import it
-	var name = window.location.search.substring(1).split("=")[1];
 	if (name != undefined)
 	{
 		var StoryMap = Parse.Object.extend("StoryMap");
@@ -457,6 +462,7 @@ $(document).ready(function() {
 		  error: function(object, error) {
 			// The object was not retrieved successfully.
 			// error is a Parse.Error with an error code and description.
+		  	alert("I'm sorry, but something went wrong with retrieving your storymap: " + error);
 		  }
 		});
 	}
@@ -483,6 +489,11 @@ $(document).ready(function() {
 					  success: function(user) {
 						$("input[name=store]").val("save");
 						$("#loginDialog").dialog("close");
+						
+						//reload board
+						var exported = exportBoard();
+						initBoard();
+						importBoard(exported);
 					  },
 					  error: function(user, error) {
 						if (confirm("Failed to login. Do you want to create a new account?"))

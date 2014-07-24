@@ -4229,13 +4229,18 @@ div.login.ui-dialog-content + div button:nth-of-type(2):focus {
     page-break-after: avoid;
   }
 }
-.sprint_arrows {
-  display: none;
+.sprint_actions {
   margin-left: auto;
   margin-right: auto;
-  width: 3em;
+  opacity: 0;
+  transition: all 0.5s ease;
+  width: 0em;
+  height: 0em;
 }
-.row .cell:first-child:hover .sprint_arrows {
-  display: block;
-  transition-delay: 1s;
+.row .cell:first-child:hover .sprint_actions {
+  opacity: 1;
+  transition-delay: 2s;
+  width: 6em;
+  height: 1.5em;
+  background-color: #E9EAEB;
 }
