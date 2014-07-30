@@ -28,7 +28,7 @@ function createCell()
 
 		
 		var arrows = $('<div class="sprint_actions"/>');
-		arrows.append($('<span class="add_sprint_here">+ add sprint</span>').click(function(event) {
+		arrows.append($('<span class="add_sprint_here">+add below</span>').click(function(event) {
 				event.stopPropagation();
 				var exported = exportBoard();
 		
