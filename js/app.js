@@ -210,20 +210,25 @@ function createStory(storyText)
 		//color switch
 		var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
 		color.click(function(event) {
-			var story = $(this).parent().parent();
+			var localStory = $(this).parent().parent();
 		
 			for(var i=0; i < cycle.length; i++)
 			{
-				if ( story.hasClass(cycle[i]) ) {
+				if ( localStory.hasClass(cycle[i]) ) 
+				{
+					$.each(cycle, function(index, value) {
+						localStory.removeClass(value);	
+					});
+					
 					if (i == cycle.length-1)
 					{
-						story.addClass("none");
+						localStory.addClass("none");
 					}
 					else
 					{
-						story.addClass(cycle[i+1]);
+						localStory.addClass(cycle[i+1]);
 					}
-					story.removeClass(cycle[i]);
+					
 					break;
 				}
 			}
@@ -336,6 +341,8 @@ function initBoard()
 
 function importBoard(data)
 {
+	console.log(data);
+	
 	//set the title
 	$("#title").text(data["title"]);
 	$("head title").text(data["title"]);
@@ -412,6 +419,8 @@ function exportBoard()
 	var title = $("#title").text();
 
 	data = {title: title, header: headers, cells: rows};
+	
+	console.log(data);
 	
 	return data
 }
