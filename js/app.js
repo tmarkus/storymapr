@@ -1,11 +1,11 @@
-var lanes = 0; //number of lanes	
+var lanes = 0; //number of lanes
 var sprints = 0; //number of sprints
 var default_story_text = "My cat ate my homework."
 var enabled = false;
 
 var cycle = ["none", "designed", "activated"]; //possible states a story can be in
 
-function createCell() 
+function createCell()
 {
 	var cell = $('<td class="cell"></td>');
 
@@ -18,7 +18,7 @@ function createCell()
 				var draggedStory = $(".ui-draggable-dragging");
 
 				var e = draggedStory.detach();
-				e.removeAttr("style");				
+				e.removeAttr("style");
 				e.draggable();
 
 				$(this).append(e);
@@ -26,23 +26,23 @@ function createCell()
 			}
 		});
 
-		
+
 		var arrows = $('<div class="sprint_actions"/>');
 		arrows.append($('<span class="add_sprint_here">+add below</span>').click(function(event) {
 				event.stopPropagation();
 				var exported = exportBoard();
-		
+
 				//add sprint
-				var index = $(this).closest("tr").index(); 
+				var index = $(this).closest("tr").index();
 				exported["cells"].splice(index+1, 0, []);
-				
+
 				//reload board
 				initBoard();
 				importBoard(exported);
 		}));
 
 		cell.append(arrows);
-	
+
 		//add a story to a cell
 		cell.click(function() {
 			if ($("#board").find("textarea").size() == 0) { //only add it if we don't have an open textarea
@@ -103,19 +103,19 @@ function addHeader(title)
 						},
 					});
 
-		
+
 			var arrows = $('<span class="arrows"></span>');
 
 			//left arrow
 			arrows.append($("<span>&#8592; </span>").click(function() {
 				var exported = exportBoard();
-		
+
 				//swap arrays
-				var index = $(this).closest("th").index(); 
+				var index = $(this).closest("th").index();
 				if (index > 1)
 				{
 					swapElements(exported["header"], index, index-1);
-			
+
 					$.each(exported["cells"], function(row_id, value) {
 						swapElements(exported["cells"][row_id], index, index-1);
 					});
@@ -125,17 +125,17 @@ function addHeader(title)
 				initBoard();
 				importBoard(exported);
 			}));
-		
+
 			//right arrow
 			arrows.append($("<span>&#8594;</span>").click(function() {
 				var exported = exportBoard();
-			
+
 				//swap arrays
 				var index = $(this).closest("th").index();
 				if (index < lanes-1)
 				{
 					swapElements(exported["header"], index, index+1);
-			
+
 					$.each(exported["cells"], function(row_id, value) {
 						swapElements(exported["cells"][row_id], index, index+1);
 					});
@@ -145,10 +145,10 @@ function addHeader(title)
 				initBoard();
 				importBoard(exported);
 			}));
-		
+
 			headerCell.append(arrows);
 		}
-	
+
 		//make header text editable
 		$(headerCellText).find(".title").editable(function(value, settings) {
 			return value;
@@ -160,9 +160,9 @@ function addHeader(title)
 	}
 
 
-	//add a new cell to each row				
+	//add a new cell to each row
 	$.each($("#board #tbody .row"), function() {
-		$(this).append(createCell());	
+		$(this).append(createCell());
 	});
 }
 
@@ -170,7 +170,7 @@ function removeLane(removeLaneHeader)
 {
 	var index = $(removeLaneHeader).index();
 	var exported = exportBoard();
-	
+
 	exported["header"].splice(index,1);
 	$.each(exported["cells"], function(row_id, value) {
 		exported["cells"][row_id].splice(index, 1 );
@@ -185,7 +185,7 @@ function removeLane(removeLaneHeader)
 function addSprint()
 {
 	sprints = sprints + 1;
-	
+
 	//add additional cells for the new row
 	var row = $('<tr class="row"></tr>');
 
@@ -195,8 +195,8 @@ function addSprint()
 	}
 
 	$("#board #tbody").append(row);
-	return row;	
-}	
+	return row;
+}
 
 function createStory(storyText)
 {
@@ -211,15 +211,15 @@ function createStory(storyText)
 		var color = $('<span class="ui-icon ui-icon-circle-check right"></span>');
 		color.click(function(event) {
 			var localStory = $(this).parent().parent();
-		
+
 			for(var i=0; i < cycle.length; i++)
 			{
-				if ( localStory.hasClass(cycle[i]) ) 
+				if ( localStory.hasClass(cycle[i]) )
 				{
 					$.each(cycle, function(index, value) {
-						localStory.removeClass(value);	
+						localStory.removeClass(value);
 					});
-					
+
 					if (i == cycle.length-1)
 					{
 						localStory.addClass("none");
@@ -228,7 +228,7 @@ function createStory(storyText)
 					{
 						localStory.addClass(cycle[i+1]);
 					}
-					
+
 					break;
 				}
 			}
@@ -250,16 +250,17 @@ function createStory(storyText)
 	var storyContent = $('<span class="storyText"></span>').html(storyText);
 	story.append(storyContent);
 
-	
+
 	if (enabled)
 	{
-		$(storyContent).editable(function(value, settings) {return value.replace(/\n/g, "<br>"); }, 
+		$(storyContent).editable(function(value, settings)
+			{ return value.replace(/\n/g, "<br>"); },
 			{
 				data: function(value, settings) {
-				return value.replace(/<br[\s\/]?>/gi, "\n");
-			},
-			type: 'textarea',
-			onblur: 'submit' //store changes on lost focus
+					return value.replace(/<br[\s\/]?>/gi, "\n");
+				},
+				type: 'textarea',
+				onblur: 'submit' //store changes on lost focus
 		});
 
 		//enable autogrow for the newly created textarea
@@ -281,7 +282,7 @@ function createStory(storyText)
 									drop: function( event, ui ) {
 										var draggedStory = $(".ui-draggable-dragging");
 										draggedStory.remove();
-									
+
 										$("#removeArea").animate({height: 0, opacity: 0}, 'slow', function(){ $("#removeArea").remove(); });
 									}
 								});
@@ -312,16 +313,16 @@ function initBoard()
 {
 		//should we enable edit functionality?
 		enabled = (!Parse.User.current() && (name == undefined)) || (Parse.User.current() && (name != undefined))
-		
+
 		if (enabled)
 		{
 			$('input[name=addSprint]').click(function() {
-				addSprint();				
+				addSprint();
 			});
 
 			$('input[name=addLane]').click(function() {
 				addHeader();
-			});		
+			});
 
 			//make title editable
 			$("#title").editable(function(value, settings) {
@@ -331,7 +332,7 @@ function initBoard()
 				type: 'text'
 			});
 		}
-		
+
 		lanes = 0;
 		sprints = 0;
 		$("#board").empty();
@@ -341,29 +342,27 @@ function initBoard()
 
 function importBoard(data)
 {
-	console.log(data);
-	
 	//set the title
 	$("#title").text(data["title"]);
 	$("head title").text(data["title"]);
-	
+
 	//set the headers again
 	jQuery.each(data["header"], function(i, val) {
 		addHeader(val);
 	});
-	
+
 	//import each sprint
 	jQuery.each(data["cells"], function(i, row) {
 		//first add a 'sprint' for the row
 		var currentSprint = addSprint();
-		
+
 		jQuery.each(row, function(j, cell) {
 			//then select the correct cell in that sprint
 			currentSprint.find(".cell").each(function(k, cellInDocument) {
 				if (j == k)
 				{
 					jQuery.each(cell, function(z, storyData) {
-						
+
 						//backwards compat for when stories only consisted of text
 						if (typeof storyData == 'string')
 						{
@@ -389,15 +388,15 @@ function exportBoard()
 	$("#board #thead .cell .title").each (function() {
 		headers.push($(this).text());
 	});
-	
+
 	//iterate over a row
 	var rows = [];
-	$("#board #tbody .row").each (function() 
+	$("#board #tbody .row").each (function()
 	{
 		var cells = [];
 		$(this).find(".cell").each(function () {
 			var cell = [];
-			$(this).find(".story .storyText").each(function() 
+			$(this).find(".story .storyText").each(function()
 			{
 
 				var resultState = "none";
@@ -408,7 +407,7 @@ function exportBoard()
 						resultState = state;
 					}
 				});
-				
+
 				cell.push({'text': $(this).html(), 'state': resultState});
 			});
 			cells.push(cell);
@@ -419,9 +418,9 @@ function exportBoard()
 	var title = $("#title").text();
 
 	data = {title: title, header: headers, cells: rows};
-	
+
 	console.log(data);
-	
+
 	return data
 }
 
@@ -432,7 +431,7 @@ $(document).ready(function() {
 
 	//reset the board
 	initBoard();
-	
+
 	function updateBoard(currentBoard, newBoard)
 	{
 		if (newBoard)
@@ -454,7 +453,7 @@ $(document).ready(function() {
 				}
 			},
 			error: function(currentBoard, error) {
-				alert("Error: I'm sorry Dave, I can't let you do that. (" + error.code + " " + error.message + ")");			
+				alert("Error: I'm sorry Dave, I can't let you do that. (" + error.code + " " + error.message + ")");
 			}
 		});
 	}
@@ -498,7 +497,7 @@ $(document).ready(function() {
 					  success: function(user) {
 						$("input[name=store]").val("save");
 						$("#loginDialog").dialog("close");
-						
+
 						//reload board
 						var exported = exportBoard();
 						initBoard();
@@ -510,7 +509,7 @@ $(document).ready(function() {
 							var user = new Parse.User();
 							user.set("username", $("input[name=username]").val());
 							user.set("password", $("input[name=password]").val());
-						
+
 							user.signUp(null, {
 							  success: function(user) {
 								$("input[name=store]").val("save");
@@ -539,17 +538,17 @@ $(document).ready(function() {
 
 	//actions for the dual save/login button
 	$('input[name=store]').click(function () {
-	
+
 		if ($(this).val() == "save") //asume user is logged in, so saving is possible
 		{
 			var StoryMap = Parse.Object.extend("StoryMap");
 			var query = new Parse.Query(StoryMap);
-		
+
 			var currentBoard = undefined;
 			var name = window.location.search.substring(1).split("=")[1];
-		
+
 			$(this).attr('disabled', true).attr('value', 'updating...');
-		
+
 			query.get(name, {
 				  success: function(currentBoard) {
 					$('input[name=store]').attr('disabled', false).attr('value', 'save');
